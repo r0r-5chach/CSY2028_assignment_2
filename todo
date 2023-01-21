@@ -1,0 +1,26 @@
+Assignment 2:
+    - Copyright updates to current year @done
+    - Add FAQs page
+        - Placeholder text ('FAQs coming soon')
+        - Menu link
+    - Admin can update categories but are not visable on site
+        - Add cats to Jobs page
+        - Add cats to nav bar
+    - Job list in admin area lists all jobs
+        - Add cat name as new column in table
+        - Add filter to be able to filter by cat
+    - Allow customers to filter by location
+    - Add admin user control to admin panel
+    - Client user accounts
+        - restricted admin panel
+        - add and remove jobs
+        - see who has applied for jobs
+        - Client can only see their jobs
+    - Homepage has 10 jobs that are about to reach closing date
+    - Contact form on contact page
+        - forms store data in db
+        - stored enquiries can be accessed from admin panel
+        - can mark enquieries as Completed once admin has responded
+        - Keep list of all previous enquieries and which admin dealt with it
+    - Create entity classes for database entities (topic 18)
+        - page 37-38 for implementation
