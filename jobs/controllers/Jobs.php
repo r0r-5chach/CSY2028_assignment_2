@@ -1,6 +1,6 @@
 <?php
 namespace jobs\controllers;
-class Home {
+class Jobs {
     private $jobTable;
 
     public function __construct(\CSY2028\DatabaseTable $jobTable) {
