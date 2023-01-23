@@ -3,11 +3,13 @@ namespace jobs\controllers;
 class Jobs {
     private $jobsTable;
     private $catsTable;
+    private $appsTable;
     private $vars = [];
 
-    public function __construct(\CSY2028\DatabaseTable $jobsTable, \CSY2028\DatabaseTable $catsTable) {
+    public function __construct(\CSY2028\DatabaseTable $jobsTable, \CSY2028\DatabaseTable $catsTable, \CSY2028\DatabaseTable $appsTable) {
         $this->jobsTable = $jobsTable;
         $this->catsTable = $catsTable;
+        $this->appsTable = $appsTable;
         $this->vars['cats'] = $this->catsTable->findAll();
     }
 
@@ -40,11 +42,47 @@ class Jobs {
     ];
     }
 
+
     public function notFound() {
-        return ['template' => 'notFound.html.php',
+        $this->vars['response'] = 'The page you have requested has not been found';
+        return ['template' => 'response.html.php',
                 'title' => 'Jo\'s Jobs- 404 Not Found',
                 'vars' => $this->vars
     ];
+    }
+
+    public function apply() {
+        $this->vars['job'] = $this->jobsTable->find('id', $_GET['id'])[0];
+        return ['template' => 'apply.html.php',
+                'title' => 'Jo\'s Jobs- Apply',
+                'vars' => $this->vars];
+
+    }
+
+    public function applySubmit() {
+        if ($_FILES['cv']['error'] == 0) {
+            $parts = explode('.', $_FILES['cv']['name']);
+            $extension = end($parts);
+            $fileName = uniqid() . '.' . $extension;
+            move_uploaded_file($_FILES['cv']['tmp_name'], 'cvs/' . $fileName);
+            $record = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'details' => $_POST['details'],
+                'jobId' => $_POST['jobId'],
+                'cv' => $fileName
+            ];
+            $this->appsTable->save($record);
+            $this->vars['response'] = 'Your application is complete. We will contact you after the closing date.';
+        }
+        else {
+            $this->vars['response'] = 'There was an error uploading your CV';
+        }
+
+        return ['template' => 'response.html.php',
+                'title' => 'Jo\'s Jobs- Apply',
+                'vars' => $this->vars];
+
     }
 }
 ?>
