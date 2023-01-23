@@ -2,6 +2,7 @@
 namespace jobs\Entity;
 class Job {
     public $id;
+    public $title;
     public $description;
     public $salary;
     public $closingDate;
