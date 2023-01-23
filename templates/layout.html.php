@@ -21,10 +21,10 @@
                 <li><a href="/">Home</a></li>
                 <li>Jobs
                     <ul>
-                        <?php require 'nav.html.php'?>
+                        <?=$nav?>
                     </ul>
                 </li>
-                <li><a href="?page=about">About Us</a></li>
+                <li><a href="/jobs/about">About Us</a></li>
             </ul>
         </nav>
         <img src="../images/randombanner.php"/>
