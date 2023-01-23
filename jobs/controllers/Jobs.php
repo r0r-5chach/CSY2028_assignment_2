@@ -84,5 +84,11 @@ class Jobs {
                 'vars' => $this->vars];
 
     }
+
+    public function faq() {
+        return ['template' => 'construction.html.php',
+                'title' => 'Jo\'s Jobs- FAQ',
+                'vars' => $this->vars];
+    }
 }
 ?>
