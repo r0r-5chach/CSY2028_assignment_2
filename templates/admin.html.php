@@ -11,3 +11,4 @@
         <input type="submit" name="submit" value="Log In" />
     </form>
 </main>
+<p><?=nl2br($response)?></p>

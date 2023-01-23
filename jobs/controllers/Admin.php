@@ -13,6 +13,7 @@ class Admin {
         $this->appsTable = $appsTable;
         $this->usersTable = $usersTable;
         $this->vars['cats'] = $this->catsTable->findAll();
+        $this->vars['response'] = '';
     }
 
     public function home() {
@@ -35,7 +36,6 @@ class Admin {
             }
         }
         else {
-            $this->vars['response'] = '';
             if ($_POST['username'] == '') {
                 $this->vars['response'] .= "No Username was entered \n";
             }
@@ -45,7 +45,7 @@ class Admin {
             $this->vars['response'] .= 'Login Unsuccessful';
         }
 
-        return ['template' => 'response.html.php',
+        return ['template' => 'admin.html.php',
                     'title' => 'Jo\'s Jobs- Login',
                     'vars' => $this->vars
         ];
