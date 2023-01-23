@@ -2,19 +2,19 @@
 namespace jobs;
 class Routes implements \CSY2028\Routes {
     public function getController($name) {
-        //TODO: Add Database Tables
-        //Remember entities
-        $jobsTable = new \CSY2028\DatabaseTable('jobs', 'id');
+        $catsTable = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
+        $jobsTable = new \CSY2028\DatabaseTable('jobs', 'id', '\jobs\Entity\Job', [$catsTable]);
+        $appsTable = new \CSY2028\DatabaseTable('applicants', 'id', '\jobs\Entity\Applicant', [$jobsTable]);
 
         $controllers = [];
         //TODO: Add Controllers
-        $controllers['home'] = new \jobs\controllers\Home($jobsTable);
+        $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable);
 
         return $controllers[$name];
     }
 
     public function getDefaultRoute() {
-       return 'home/home';
+       return 'jobs/home';
     }
 
     public function checkLogin($route) {

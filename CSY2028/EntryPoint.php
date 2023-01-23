@@ -22,6 +22,10 @@ class EntryPoint {
 
         list($controllerName, $functionName) = \explode('/', $route);
 
+        if ($functionName == '') {
+            $functionName = 'home';
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $functionName = $functionName . 'Submit';
         }
