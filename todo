@@ -22,5 +22,6 @@ Assignment 2:
         - stored enquiries can be accessed from admin panel
         - can mark enquieries as Completed once admin has responded
         - Keep list of all previous enquieries and which admin dealt with it
-    - Create entity classes for database entities (topic 18)
-        - page 37-38 for implementation
+    - Create entity classes for database entities (topic 18) @done
+        - page 37-38 for implementation @done
+    - Restrict categories by jobs available past current date
