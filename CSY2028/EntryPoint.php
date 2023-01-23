@@ -20,8 +20,13 @@ class EntryPoint {
             $route = $this->routes->getDefaultRoute();
         }
 
-        list($controllerName, $functionName) = \explode('/', $route);
-
+        if (count(\explode('/', $route)) == 1) {
+            $controllerName = \explode('/', $route)[0];
+            $functionName = "";
+        }
+        else {
+            list($controllerName, $functionName) = \explode('/', $route);
+        }
         if ($functionName == '') {
             $functionName = 'home';
         }
@@ -30,7 +35,13 @@ class EntryPoint {
             $functionName = $functionName . 'Submit';
         }
 
-        $page = $this->routes->getController($controllerName)->$functionName();
+        $page = $this->routes->getController($controllerName);
+        if ($page == null) {
+            $page = $this->routes->notFound();
+        }
+        else {
+            $page = $page->$functionName();
+        }
         $content = $this->loadTemplate('../templates/' . $page['template'], $page['vars']);
         $nav = $this->loadTemplate('../templates/nav.html.php', $page['vars']);
         $title = $page['title'];

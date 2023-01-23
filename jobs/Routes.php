@@ -8,9 +8,15 @@ class Routes implements \CSY2028\Routes {
 
         $controllers = [];
         //TODO: Add Controllers
-        $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable, $catsTable);
+        $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable, $catsTable, $appsTable);
 
-        return $controllers[$name];
+        if (array_key_exists($name, $controllers)) {
+            return $controllers[$name];
+        }
+        else {
+            return null;
+        }
+
     }
 
     public function getDefaultRoute() {
@@ -29,5 +35,21 @@ class Routes implements \CSY2028\Routes {
             exit();
         }
 
+    }
+
+    public function notFound() {
+        $cats = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
+        return ['template' => 'response.html.php',
+                'title' => 'Jo\'s Jobs- 404 Not Found',
+                'vars' => ['cats' => $cats->findAll(),
+                            'response' => '404 Page Not Found']
+    ];
+    }
+
+    public function nav() {
+        $cats = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
+        return ['template' => 'nav.html.php',
+                'vars' => ['cats' => $cats->findAll()]
+    ];
     }
 }
