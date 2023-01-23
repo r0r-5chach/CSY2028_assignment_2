@@ -24,6 +24,7 @@
                         <?=$nav?>
                     </ul>
                 </li>
+                <li><a href="/jobs/faq">FAQ</a></li>
                 <li><a href="/jobs/about">About Us</a></li>
             </ul>
         </nav>
