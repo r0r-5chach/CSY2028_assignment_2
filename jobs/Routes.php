@@ -5,10 +5,12 @@ class Routes implements \CSY2028\Routes {
         $catsTable = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
         $jobsTable = new \CSY2028\DatabaseTable('job', 'id', '\jobs\Entity\Job', [$catsTable]);
         $appsTable = new \CSY2028\DatabaseTable('applicants', 'id', '\jobs\Entity\Applicant', [$jobsTable]);
+        $usersTable = new \CSY2028\DatabaseTable('users', 'id', '\jobs\Entity\User');
 
         $controllers = [];
         //TODO: Add Controllers
         $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable, $catsTable, $appsTable);
+        $controllers['admin'] = new \jobs\controllers\Admin($jobsTable, $catsTable, $appsTable, $usersTable);
 
         if (array_key_exists($name, $controllers)) {
             return $controllers[$name];
@@ -27,11 +29,11 @@ class Routes implements \CSY2028\Routes {
         \session_start();
         $loginRoutes = [];
         //TODO: Add login routes
-        //$loginRoutes['job/edit'] = true;
+        //$loginRoutes['admin/'] = true;
         $requiresLogin = $loginRoutes[$route] ?? false;
 
         if ($requiresLogin && !\isset($_SESSION['loggedin'])) {
-            \header('location: /user/login');
+            \header('location: /admin/');
             exit();
         }
 

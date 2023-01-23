@@ -1,3 +1,3 @@
 <main class="home">
-    <p><?=$response?></p>
+    <p><?=nl2br($response)?></p>
 </main>
