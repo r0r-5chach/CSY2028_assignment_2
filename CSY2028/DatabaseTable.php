@@ -25,27 +25,33 @@ class DatabaseTable {
         $keys = \array_keys($record);
         $columns = \implode(', ', $keys);
         $values = \implode(', :', $keys);
-        startDB()->prepare('INSERT INTO '. $this->table . ' (' . $columns . ') VALUES (:' . $values . ')')->execute($record);
+        $this->startDB()->prepare('INSERT INTO '. $this->table . ' (' . $columns . ') VALUES (:' . $values . ')')->execute($record);
     }
     
     private function update($record) {
-         $params = [];
-         foreach ($record as $key => $value) {
+        $params = [];
+        foreach ($record as $key => $value) {
             $params[] = $key . ' = :' .$key;
-         }
-         $record['primaryKey'] = $record[$this->pk];
-         startDB()->prepare('UPDATE '. $this->table .' SET '. \implode(', ', $params) .' WHERE '. $this->pk .' = :primaryKey')->execute($record);
+        }
+        $record['primaryKey'] = $record[$this->pk];
+        $this->startDB()->prepare('UPDATE '. $this->table .' SET '. \implode(', ', $params) .' WHERE '. $this->pk .' = :primaryKey')->execute($record);
     }
 
     public function find($column, $value) {
         $values = [
             'value' => $value
         ];
-        return startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $field . ' = :value')->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor)->execute($values)->fetchAll();
+        $stmt = $this->startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' = :value');
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
+        $stmt->execute($values);
+        return $stmt->fetchAll();
     }
     
     public function findAll() {
-        return startDB()->prepare('SELECT * FROM ' . $this->table)->execute()->fetchAll();
+        $stmt = $this->startDB()->prepare('SELECT * FROM ' . $this->table);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
     
     public function delete($column, $value) {

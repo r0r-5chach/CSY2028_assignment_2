@@ -35,19 +35,7 @@
 	<img src="images/randombanner.php"/>
 	<main class="sidebar">
 
-	<section class="left">
-		<ul>
-			<li><a href="it.php">IT</a></li>
-			<li><a href="hr.php">Human Resources</a></li>
-			<li class="current"><a href="sales.php">Sales</a></li>
-		</ul>
-	</section>
-
-	<section class="right">
-
-	<h1>Sales Jobs</h1>
-
-	<ul class="listing">
+	
 
 
 	<?php
