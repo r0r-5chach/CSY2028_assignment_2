@@ -62,14 +62,14 @@ class DatabaseTable {
     }
     
     public function save($record) {
-        if (\empty($record[$pk])) {
-            \unset($record[$pk]);
+        if (empty($record[$this->pk])) {
+            unset($record[$this->pk]);
         }
         try {
-            insert($record);
+            $this->insert($record);
         }
         catch (\Exception $e) {
-            update($record);
+            $this->update($record);
         }
     }
 }

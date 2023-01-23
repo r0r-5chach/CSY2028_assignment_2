@@ -7,7 +7,7 @@
 
 	<section class="right">
         <h2>Apply for <?=$job->title?></h2>
-		<form action="apply.php" method="POST" enctype="multipart/form-data">
+		<form action="/jobs/apply" method="POST" enctype="multipart/form-data">
 			<label>Your name</label>
 			<input type="text" name="name" />
 
