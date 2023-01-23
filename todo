@@ -3,9 +3,9 @@ Assignment 2:
     - Add FAQs page
         - Placeholder text ('FAQs coming soon')
         - Menu link
-    - Admin can update categories but are not visable on site
-        - Add cats to Jobs page
-        - Add cats to nav bar
+    - Admin can update categories but are not visable on site @done
+        - Add cats to Jobs page @done
+        - Add cats to nav bar @done
     - Job list in admin area lists all jobs
         - Add cat name as new column in table
         - Add filter to be able to filter by cat
@@ -25,3 +25,4 @@ Assignment 2:
     - Create entity classes for database entities (topic 18) @done
         - page 37-38 for implementation @done
     - Restrict categories by jobs available past current date
+    - Limit applications to jobs to 1 per email
