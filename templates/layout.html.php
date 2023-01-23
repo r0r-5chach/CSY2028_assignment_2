@@ -21,18 +21,14 @@
                 <li><a href="/">Home</a></li>
                 <li>Jobs
                     <ul>
-                        <li><a href="?page=it">IT</a></li>
-                        <li><a href="?page=hr">Human Resources</a></li>
-                        <li><a href="?page=sales">Sales</a></li>
+                        <?php require 'nav.html.php'?>
                     </ul>
                 </li>
                 <li><a href="?page=about">About Us</a></li>
             </ul>
         </nav>
         <img src="../images/randombanner.php"/>
-        <main class="home">
             <?=$content;?>
-        </main>
         <footer>
             &copy; Jo's Jobs <?=date('Y');?>
         </footer>
