@@ -37,14 +37,26 @@ class DatabaseTable {
         $this->startDB()->prepare('UPDATE '. $this->table .' SET '. \implode(', ', $params) .' WHERE '. $this->pk .' = :primaryKey')->execute($record);
     }
 
-    public function find($column, $value) {
-        $values = [
-            'value' => $value
-        ];
-        $stmt = $this->startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' = :value');
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
-        $stmt->execute($values);
-        return $stmt->fetchAll();
+    public function find($column, $value, $column2 = "", $value2 = "") {
+        if ($column2 == "" && $value2 == "") {
+            $values = [
+                'value' => $value
+            ];
+            $stmt = $this->startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' = :value');
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
+            $stmt->execute($values);
+            return $stmt->fetchAll();
+        }
+        else {
+            $values = [
+                'value' => $value,
+                'value2' => $value2
+            ];
+            $stmt = $this->startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' = :value AND'. $column2 .' = :value2');
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
+            $stmt->execute($values);
+            return $stmt->fetchAll();
+        }
     }
     
     public function findAll() {
