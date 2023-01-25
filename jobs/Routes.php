@@ -11,7 +11,7 @@ class Routes implements \CSY2028\Routes {
         $controllers = [];
         //TODO: Add Controllers
         $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable, $catsTable, $appsTable);
-        $controllers['admin'] = new \jobs\controllers\Admin($jobsTable, $catsTable, $appsTable, $usersTable);
+        $controllers['portal'] = new \jobs\controllers\Portal($catsTable, $jobsTable, $appsTable);
         $controllers['user'] = new \jobs\controllers\User($usersTable, $catsTable);
         
         if (array_key_exists($controllerName, $controllers)) {
