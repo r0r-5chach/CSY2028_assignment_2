@@ -7,7 +7,7 @@ Assignment 2:
         - Add cats to Jobs page @done
         - Add cats to nav bar @done
     - Job list in admin area lists all jobs
-        - Add cat name as new column in table
+        - Add cat name as new column in table @done
         - Add filter to be able to filter by cat
     - Allow customers to filter by location
     - Add admin user control to admin panel

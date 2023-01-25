@@ -16,11 +16,21 @@ class Portal {
 
     public function home() {
         $this->vars['table'] = 'job_table.html.php';
-        if ($_SESSION['userType'] == 'client') {
-            $this->vars['jobs'] = $this->jobsTable->find('clientId', $_SESSION['loggedin']);
-        }
+        if (isset($_GET['filter'])) {
+            if ($_SESSION['userType'] == 'client') {
+                $this->vars['jobs'] = $this->jobsTable->find('clientId', $_SESSION['loggedin'], "categoryId", $_GET['filter']);
+            }
+            else {
+                $this->vars['jobs'] = $this->jobsTable->find("categoryId", $_GET['filter']);
+            }
+        } 
         else {
-            $this->vars['jobs'] = $this->jobsTable->findAll();
+            if ($_SESSION['userType'] == 'client') {
+                $this->vars['jobs'] = $this->jobsTable->find('clientId', $_SESSION['loggedin']);
+            }
+            else {
+                $this->vars['jobs'] = $this->jobsTable->findAll();
+            }
         }
         return ['template' => 'portal.html.php',
                 'title' => 'Jo\'s Jobs- Jobs',

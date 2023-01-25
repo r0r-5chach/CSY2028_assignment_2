@@ -1,6 +1,6 @@
 <h2>Jobs</h2>
 <a class="new" href="addjob.php">Add new job</a>
-<form method="post" action="portal/">
+<form method="get" action="/portal">
 	<label for="filter">Filter:</label>
 	<select name="filter">
 		<?php foreach ($cats as $cat) { ?>
