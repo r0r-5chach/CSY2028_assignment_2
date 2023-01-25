@@ -14,10 +14,10 @@
 		    <tr>
 				<td><?=$job->title?></td>
 				<td><?=$job->salary?></td>
-				<td><a style="float: right" href="portal/edit?id=<?=$job->id?>">Edit</a></td>
-				<td><a style="float: right" href="applicants.php?id=<?=$job->id?>">View applicants (count)</a></td>
-				<td><form method="post" action="portal/delete">
-				    <input type="hidden" name="id" value="<?=$job->id?>" />
+				<td><a style="float: right" href="portal/edit?job_id=<?=$job->id?>">Edit</a></td>
+				<td><a style="float: right" href="portal/applicants?app_id=<?=$job->id?>">View applicants (count)</a></td>
+				<td><form method="post" action="portal/">
+				    <input type="hidden" name="job_id" value="<?=$job->id?>" />
 				    <input type="submit" name="submit" value="Delete" />
 				</form></td>
 			</tr>
