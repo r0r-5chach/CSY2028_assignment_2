@@ -43,7 +43,7 @@ class User {
             $this->vars['response'] .= 'Login Unsuccessful';
         }
 
-        return ['template' => 'login.html.php',
+        return ['template' => 'response.html.php',
                     'title' => 'Jo\'s Jobs- Login',
                     'vars' => $this->vars
         ];
