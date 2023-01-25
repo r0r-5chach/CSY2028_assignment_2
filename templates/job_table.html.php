@@ -5,6 +5,7 @@
 	    <tr>
 		    <th>Title</th>
 			<th style="width: 15%">Salary</th>
+			<th>Category</th>
 			<th style="width: 5%">&nbsp;</th>
 			<th style="width: 15%">&nbsp;</th>
 			<th style="width: 5%">&nbsp;</th>
@@ -14,6 +15,7 @@
 		    <tr>
 				<td><?=$job->title?></td>
 				<td><?=$job->salary?></td>
+				<td><?=$job->getCat()->name?></td>
 				<td><a style="float: right" href="portal/edit?job_id=<?=$job->id?>">Edit</a></td>
 				<td><a style="float: right" href="portal/applicants?app_id=<?=$job->id?>">View applicants (count)</a></td>
 				<td><form method="post" action="portal/">
