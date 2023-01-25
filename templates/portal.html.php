@@ -8,6 +8,6 @@
 		</ul>
 	</section>
 	<section class="right">
-	    <?=require $table;?>
+	    <?php require $table?>
     </section>
 </main>

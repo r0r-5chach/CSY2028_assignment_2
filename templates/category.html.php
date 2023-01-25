@@ -1,7 +1,7 @@
 <main class = "sidebar">
     <section class="left">
         <ul>
-            <?=require 'nav.html.php'?>
+            <?php require 'nav.html.php'?>
         </ul>
     </section>
 
