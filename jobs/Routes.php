@@ -1,7 +1,8 @@
 <?php
 namespace jobs;
 class Routes implements \CSY2028\Routes {
-    public function getController($name) {
+
+    public function getController($controllerName, $functionName) {
         $catsTable = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
         $jobsTable = new \CSY2028\DatabaseTable('job', 'id', '\jobs\Entity\Job', [$catsTable]);
         $appsTable = new \CSY2028\DatabaseTable('applicants', 'id', '\jobs\Entity\Applicant', [$jobsTable]);
@@ -11,9 +12,15 @@ class Routes implements \CSY2028\Routes {
         //TODO: Add Controllers
         $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable, $catsTable, $appsTable);
         $controllers['admin'] = new \jobs\controllers\Admin($jobsTable, $catsTable, $appsTable, $usersTable);
-
-        if (array_key_exists($name, $controllers)) {
-            return $controllers[$name];
+        $controllers['user'] = new \jobs\controllers\User($usersTable, $catsTable);
+        
+        if (array_key_exists($controllerName, $controllers)) {
+            if (\method_exists($controllers[$controllerName], $functionName)) {
+                return $controllers[$controllerName];
+            }
+            else {
+                return null;
+            }
         }
         else {
             return null;
@@ -26,14 +33,14 @@ class Routes implements \CSY2028\Routes {
     }
 
     public function checkLogin($route) {
-        \session_start();
         $loginRoutes = [];
         //TODO: Add login routes
-        //$loginRoutes['admin/'] = true;
+        //$loginRoutes['user'] = true;
+        $loginRoutes['/admin/'] = true;
         $requiresLogin = $loginRoutes[$route] ?? false;
 
-        if ($requiresLogin && !\isset($_SESSION['loggedin'])) {
-            \header('location: /admin/');
+        if ($requiresLogin && !isset($_SESSION['loggedin'])) {
+            header('location: /user/login');
             exit();
         }
 

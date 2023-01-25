@@ -16,6 +16,8 @@ class EntryPoint {
 
     public function run() {
         $route = \ltrim(\explode('?', $_SERVER['REQUEST_URI'])[0], '/');
+
+
         if ($route == '') {
             $route = $this->routes->getDefaultRoute();
         }
@@ -35,7 +37,7 @@ class EntryPoint {
             $functionName = $functionName . 'Submit';
         }
 
-        $page = $this->routes->getController($controllerName);
+        $page = $this->routes->getController($controllerName, $functionName);
         if ($page == null) {
             $page = $this->routes->notFound();
         }

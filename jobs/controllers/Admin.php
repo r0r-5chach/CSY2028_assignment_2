@@ -17,7 +17,7 @@ class Admin {
     }
 
     public function home() {
-        return ['template' => 'admin.html.php',
+        return ['template' => 'login.html.php',
                 'title' => 'Jo\'s Jobs- Login',
                 'vars' => $this->vars];
     }
