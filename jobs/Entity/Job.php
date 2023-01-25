@@ -8,6 +8,7 @@ class Job {
     public $closingDate;
     public $location;
     public $categoryId;
+    public $clientId;
     private $catsTable;
 
     public function __construct(\CSY2028\DatabaseTable $catsTable) {
