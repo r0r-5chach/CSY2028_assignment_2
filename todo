@@ -9,13 +9,13 @@ Assignment 2:
     - Job list in admin area lists all jobs @done
         - Add cat name as new column in table @done
         - Add filter to be able to filter by cat @done
-    - Allow customers to filter by location
+    - Allow customers to filter by location @done
     - Add admin user control to admin panel
     - Client user accounts
-        - restricted admin panel
+        - restricted admin panel @done
         - add and remove jobs
-        - see who has applied for jobs
-        - Client can only see their jobs
+        - see who has applied for jobs @done
+        - Client can only see their jobs @done
     - Homepage has 10 jobs that are about to reach closing date
     - Contact form on contact page
         - forms store data in db
