@@ -26,7 +26,13 @@ class Jobs {
             return $this->notFound();
         }
         else {
-            $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id);
+            if (isset($_GET['filter'])) {
+                $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id, "location", $_GET['filter']);
+            }
+            else {
+                $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id);
+
+            }
             $this->vars['heading'] = $cat[0]->name;
             return ['template' => 'category.html.php',
                     'title' => 'Jo\'s Jobs- '. $_GET['page'],
