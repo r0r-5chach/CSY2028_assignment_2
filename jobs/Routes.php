@@ -3,13 +3,12 @@ namespace jobs;
 class Routes implements \CSY2028\Routes {
 
     public function getController($controllerName, $functionName) {
-        $catsTable = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
-        $jobsTable = new \CSY2028\DatabaseTable('job', 'id', '\jobs\Entity\Job', [$catsTable]);
-        $appsTable = new \CSY2028\DatabaseTable('applicants', 'id', '\jobs\Entity\Applicant', [$jobsTable]);
-        $usersTable = new \CSY2028\DatabaseTable('users', 'id', '\jobs\Entity\User');
+        $catsTable = new \jobs\JobDatabaseTable('category', 'id', '\jobs\Entity\Category');
+        $jobsTable = new \jobs\JobDatabaseTable('job', 'id', '\jobs\Entity\Job', [$catsTable]);
+        $appsTable = new \jobs\JobDatabaseTable('applicants', 'id', '\jobs\Entity\Applicant', [$jobsTable]);
+        $usersTable = new \jobs\JobDatabaseTable('users', 'id', '\jobs\Entity\User');
 
         $controllers = [];
-        //TODO: Add Controllers
         $controllers['jobs'] = new \jobs\controllers\Jobs($jobsTable, $catsTable, $appsTable);
         $controllers['portal'] = new \jobs\controllers\Portal($catsTable, $jobsTable, $appsTable);
         $controllers['user'] = new \jobs\controllers\User($usersTable, $catsTable);
@@ -36,7 +35,6 @@ class Routes implements \CSY2028\Routes {
 
     public function checkLogin($name) {
         $loginRoutes = [];
-        //TODO: Add login routes
         $loginRoutes['portal'] = true;
         $requiresLogin = $loginRoutes[$name] ?? false;
 
@@ -48,7 +46,7 @@ class Routes implements \CSY2028\Routes {
     }
 
     public function notFound() {
-        $cats = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
+        $cats = new \jobs\JobDatabaseTable('category', 'id', '\jobs\Entity\Category');
         return ['template' => 'response.html.php',
                 'title' => 'Jo\'s Jobs- 404 Not Found',
                 'vars' => ['cats' => $cats->findAll(),
@@ -57,7 +55,7 @@ class Routes implements \CSY2028\Routes {
     }
 
     public function nav() {
-        $cats = new \CSY2028\DatabaseTable('category', 'id', '\jobs\Entity\Category');
+        $cats = new \jobs\JobDatabaseTable('category', 'id', '\jobs\Entity\Category');
         return ['template' => 'nav.html.php',
                 'vars' => ['cats' => $cats->findAll()]
     ];

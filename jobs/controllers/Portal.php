@@ -6,7 +6,7 @@ class Portal {
     private $appsTable;
     private $vars;
 
-    public function __construct(\CSY2028\DatabaseTable $catsTable, \CSY2028\DatabaseTable $jobsTable, \CSY2028\DatabaseTable $appsTable) {
+    public function __construct(\jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $appsTable) {
         $this->catsTable = $catsTable;
         $this->jobsTable = $jobsTable;
         $this->appsTable = $appsTable;

@@ -11,7 +11,7 @@ class Job {
     public $clientId;
     private $catsTable;
 
-    public function __construct(\CSY2028\DatabaseTable $catsTable) {
+    public function __construct(\jobs\JobDatabaseTable $catsTable) {
         $this->catsTable = $catsTable;
     }
 

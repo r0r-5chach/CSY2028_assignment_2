@@ -6,7 +6,7 @@ class Jobs {
     private $appsTable;
     private $vars = [];
 
-    public function __construct(\CSY2028\DatabaseTable $jobsTable, \CSY2028\DatabaseTable $catsTable, \CSY2028\DatabaseTable $appsTable) {
+    public function __construct(\jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $appsTable) {
         $this->jobsTable = $jobsTable;
         $this->catsTable = $catsTable;
         $this->appsTable = $appsTable;

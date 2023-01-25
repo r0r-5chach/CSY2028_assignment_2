@@ -9,7 +9,7 @@ class Applicant {
     public $jobId;
     private $jobsTable;
 
-    public function __construct(\CSY2028\DatabaseTable $jobsTable) {
+    public function __construct(\jobs\JobDatabaseTable $jobsTable) {
         $this->jobsTable = $jobsTable;
     }
 

@@ -5,7 +5,7 @@ class User {
     private $catsTable;
     private $vars;
 
-    public function __construct(\CSY2028\DatabaseTable $usersTable, \CSY2028\DatabaseTable $catsTable) {
+    public function __construct(\jobs\JobDatabaseTable $usersTable, \jobs\JobDatabaseTable $catsTable) {
         $this->usersTable = $usersTable;
         $this->catsTable = $catsTable;
         $this->vars['cats'] = $this->catsTable->findAll();
