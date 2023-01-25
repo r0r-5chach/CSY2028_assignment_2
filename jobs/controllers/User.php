@@ -19,8 +19,8 @@ class User {
     }
 
     public function loginSubmit() {
-        if ($_POST['username'] == '' && $_POST['password'] = '') {
-            $user = $this->usersTable->find("username", $_POST['username']);
+        if ($_POST['username'] != '' && $_POST['password'] != '') {
+            $user = $this->usersTable->find("username", $_POST['username'])[0];
             if (password_verify($_POST['password'], $user->password)) {
                 $_SESSION['loggedin'] = $user->id;
                 $_SESSION['userType'] = $user->userType;
@@ -43,7 +43,7 @@ class User {
             $this->vars['response'] .= 'Login Unsuccessful';
         }
 
-        return ['template' => 'admin.html.php',
+        return ['template' => 'login.html.php',
                     'title' => 'Jo\'s Jobs- Login',
                     'vars' => $this->vars
         ];
