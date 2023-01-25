@@ -49,3 +49,4 @@ class EntryPoint {
         require '../templates/layout.html.php';
     }
 }
+?>

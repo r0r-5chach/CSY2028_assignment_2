@@ -19,3 +19,4 @@ class Job {
         return $this->catsTable->find('id', $this->categoryId)[0];
     }
 }
+?>

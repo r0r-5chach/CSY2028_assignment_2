@@ -71,3 +71,4 @@ class User {
                 'vars' => $this->vars];
     }
 }
+?>

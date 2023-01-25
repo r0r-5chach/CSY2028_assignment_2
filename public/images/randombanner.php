@@ -24,3 +24,4 @@ header("Pragma: no-cache");
 header('content-length: ' . strlen($contents));
 
 echo $contents;
+?>

@@ -72,7 +72,7 @@ class Portal {
                 'vars' => $this->vars];
     }
 
-    public function edit() {
+    public function edit() { //TODO: finish this function
         if (isset($_GET['job_id'])) {
             $this->vars['job'] = $this->jobsTable->find("id", $_GET['jod_id']);
         }
@@ -80,4 +80,7 @@ class Portal {
             $this->vars['cat'] = $this->catsTable->find("id", $_GET['cat_id']);
         }
     }
+
+    //TODO: add functions for adding jobs and categories
 }
+?>

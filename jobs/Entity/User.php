@@ -6,3 +6,4 @@ class User {
     public $password;
     public $userType;
 }
+?>

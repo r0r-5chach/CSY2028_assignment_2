@@ -5,3 +5,4 @@ interface Routes {
     public function getDefaultRoute();
     public function checkLogin($route);
 }
+?>
