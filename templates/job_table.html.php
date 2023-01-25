@@ -1,5 +1,13 @@
 <h2>Jobs</h2>
 <a class="new" href="addjob.php">Add new job</a>
+<form method="post" action="portal/">
+	<label for="filter">Filter:</label>
+	<select name="filter">
+		<?php foreach ($cats as $cat) { ?>
+			<option value="<?=$cat->id?>"><?=$cat->name?></option>
+		<?php } ?>
+	</select>
+	<input type="submit" name="submit" value="filter" />
 <table>
     <thead>
 	    <tr>
