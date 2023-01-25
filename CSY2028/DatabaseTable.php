@@ -52,7 +52,7 @@ class DatabaseTable {
                 'value' => $value,
                 'value2' => $value2
             ];
-            $stmt = $this->startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' = :value AND'. $column2 .' = :value2');
+            $stmt = $this->startDB()->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' = :value AND '. $column2 .' = :value2');
             $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
             $stmt->execute($values);
             return $stmt->fetchAll();
