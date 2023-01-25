@@ -11,7 +11,13 @@
     </li>
     <li><a href="/jobs/faq">FAQ</a></li>
     <li><a href="/jobs/about">About Us</a></li>
-    <?php if (isset($_SESSION['loggedin'])) {?>
+    <?php if (isset($_SESSION['loggedin'])) {
+        if ($_SESSION['userType'] == 'admin') {?>
+            <li><a href="/admin">Admin Portal</a></li>
+        <?php } 
+        else if ($_SESSION['userType'] == 'client') {?>
+            <li><a href="/client">Client Portal</a></li>
+        <?php } ?>
         <li><a href="/user/logout">Logout</a></li>
     <?php } 
     else {?>

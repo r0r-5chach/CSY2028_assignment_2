@@ -23,14 +23,12 @@ class User {
             $user = $this->usersTable->find("username", $_POST['username']);
             if (password_verify($_POST['password'], $user->password)) {
                 $_SESSION['loggedin'] = $user->id;
-                if ($user->admin == 'y') {
-                    $_SESSION['admin'] = true;
-                }
+                $_SESSION['userType'] = $user->userType;
                 $this->vars['response'] = 'You are now logged in';
             }
             else {
                 unset($_SESSION['loggedin']);
-                unset($_SESSION['admin']);
+                unset($_SESSION['userType']);
                 $this->vars['response'] = 'Login Unsuccessful';
 
             }
@@ -53,7 +51,7 @@ class User {
 
     public function logout() {
         unset($_SESSION['loggedin']);
-        unset($_SESSION['admin']);
+        unset($_SESSION['userType']);
         $this->vars['response'] = 'Logged Out Successfully';
 
         return ['template' => 'response.html.php',
