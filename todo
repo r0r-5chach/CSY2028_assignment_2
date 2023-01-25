@@ -6,9 +6,9 @@ Assignment 2:
     - Admin can update categories but are not visable on site @done
         - Add cats to Jobs page @done
         - Add cats to nav bar @done
-    - Job list in admin area lists all jobs
+    - Job list in admin area lists all jobs @done
         - Add cat name as new column in table @done
-        - Add filter to be able to filter by cat
+        - Add filter to be able to filter by cat @done
     - Allow customers to filter by location
     - Add admin user control to admin panel
     - Client user accounts
