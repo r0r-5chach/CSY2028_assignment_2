@@ -58,7 +58,7 @@ class DatabaseTable {
         $values = [
             'value' => $value
         ];
-        startDB()->prepare('DELETE FROM '. $this->$table .' WHERE '. $column .' = :value')->execute($values);
+        $this->startDB()->prepare('DELETE FROM '. $this->table .' WHERE '. $column .' = :value')->execute($values);
     }
     
     public function save($record) {
