@@ -5,7 +5,7 @@ class DatabaseTable {
     protected $username;
     protected $password;
     protected $schema;
-    protected $pdo;
+    private $pdo;
 
     private $table;
     private $pk;
