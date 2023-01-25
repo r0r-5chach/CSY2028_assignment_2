@@ -14,6 +14,8 @@ class Routes implements \CSY2028\Routes {
         $controllers['portal'] = new \jobs\controllers\Portal($catsTable, $jobsTable, $appsTable);
         $controllers['user'] = new \jobs\controllers\User($usersTable, $catsTable);
         
+        $this->checkLogin($controllerName);
+
         if (array_key_exists($controllerName, $controllers)) {
             if (\method_exists($controllers[$controllerName], $functionName)) {
                 return $controllers[$controllerName];
@@ -32,11 +34,11 @@ class Routes implements \CSY2028\Routes {
        return 'jobs/home';
     }
 
-    public function checkLogin($route) {
+    public function checkLogin($name) {
         $loginRoutes = [];
         //TODO: Add login routes
-        //$loginRoutes['user'] = true;
-        $requiresLogin = $loginRoutes[$route] ?? false;
+        $loginRoutes['portal'] = true;
+        $requiresLogin = $loginRoutes[$name] ?? false;
 
         if ($requiresLogin && !isset($_SESSION['loggedin'])) {
             header('location: /user/login');
