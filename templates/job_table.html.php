@@ -8,6 +8,7 @@
 		<?php } ?>
 	</select>
 	<input type="submit" name="submit" value="filter" />
+</form>
 <table>
     <thead>
 	    <tr>
