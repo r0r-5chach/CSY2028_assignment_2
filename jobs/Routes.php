@@ -36,7 +36,6 @@ class Routes implements \CSY2028\Routes {
         $loginRoutes = [];
         //TODO: Add login routes
         //$loginRoutes['user'] = true;
-        $loginRoutes['/admin/'] = true;
         $requiresLogin = $loginRoutes[$route] ?? false;
 
         if ($requiresLogin && !isset($_SESSION['loggedin'])) {

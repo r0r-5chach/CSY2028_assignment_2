@@ -36,7 +36,7 @@ class EntryPoint {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $functionName = $functionName . 'Submit';
         }
-
+        $this->routes->checkLogin($route);
         $page = $this->routes->getController($controllerName, $functionName);
         if ($page == null) {
             $page = $this->routes->notFound();
