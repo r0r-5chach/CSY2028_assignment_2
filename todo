@@ -10,6 +10,7 @@ Assignment 2:
         - Add cat name as new column in table @done
         - Add filter to be able to filter by cat @done
     - Allow customers to filter by location @done
+    - Move new framework into project
     - Add admin user control to admin panel
     - Client user accounts
         - restricted admin panel @done
