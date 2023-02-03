@@ -30,3 +30,23 @@ Assignment 2:
     - Show job name at top of applicant_table
     - Seperate jobs section from nav template
     - find where the 1 had come from @done
+    - PHPUnit tests
+    - Technical Documentation
+        - Check list of requested changes (See brief for example table)
+        - Evidence of tests
+           - Test logs
+           - Output of PHPUnit
+           - coverage report
+    - Source code
+        - commented
+        - look into php-doc comments
+        - zip of websites dir
+        - word doc containing all php code
+        - make sure to include database.sql
+        - must be able to run
+        - do not not include video in zip
+        - include technical documentation in zip
+    - Video demo
+        - demonstrate changes as if I was showing the client the completed changes
+        - 10 mins max
+        

@@ -50,7 +50,7 @@ class User {
                 $this->vars['response'] .= "No Username was entered \n";
             }
             if ($_POST['password'] == '') {
-                $this->vars['response'] .= "No Username was entered \n";
+                $this->vars['response'] .= "No Password was entered \n";
             }
             $this->vars['response'] .= 'Login Unsuccessful';
         }
