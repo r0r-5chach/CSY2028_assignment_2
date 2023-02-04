@@ -16,7 +16,7 @@ class Job {
     }
 
     public function getCat() {
-        return $this->catsTable->find('id', $this->categoryId)[0];
+        return $this->catsTable->find(['id'], ['value0' => $this->categoryId])[0];
     }
 }
 ?>

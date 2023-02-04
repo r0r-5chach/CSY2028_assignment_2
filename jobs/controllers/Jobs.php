@@ -14,7 +14,7 @@ class Jobs {
     }
 
     public function home() {
-        $this->vars['jobs'] = $this->jobsTable->find("closingDate", date("y-m-d"), "", "", ">", "", "DESC", "closingDate");
+        $this->vars['jobs'] = $this->jobsTable->find(["closingDate"], ['value0' => date('y-m-d')], ['>'], "DESC", "closingDate");
         return ['template' => 'home.html.php',
                 'title' => 'Jo\'s Jobs- Home',
                 'vars' => $this->vars
@@ -22,16 +22,22 @@ class Jobs {
     }
 
     public function category() {
-        $cat = $this->catsTable->find('name', $_GET['page']);
+        $cat = $this->catsTable->find(['name'], ['value0' => $_GET['page']]);
         if ($cat == null) {
             return $this->notFound();
         }
         else {
             if (isset($_GET['filter'])) {
-                $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id, "location", $_GET['filter']);
+                $columns = ['categoryId', "location", 'closingDate'];
+                $values = ['value0' => $cat[0]->id, 
+                            'value1' => $_GET['filter'],
+                            'value2' => date('y-m-d')
+                ];
+                $comparators = ["=","=",">"];
+                $this->vars['jobs'] = $this->jobsTable->find($columns, $values, $comparators);
             }
             else {
-                $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id, "closingDate", date("y-m-d"), "=", ">");
+                $this->vars['jobs'] = $this->jobsTable->find(['categoryId', "closingDate"], ["value0" => $cat[0]->id, "value1" => date("y-m-d")], ["=", ">"]);
 
             }
             $this->vars['heading'] = $cat[0]->name;
@@ -59,7 +65,7 @@ class Jobs {
     }
 
     public function apply() {
-        $this->vars['job'] = $this->jobsTable->find('id', $_GET['id'])[0];
+        $this->vars['job'] = $this->jobsTable->find(['id'], ["value0" => $_GET['id']])[0];
         return ['template' => 'apply.html.php',
                 'title' => 'Jo\'s Jobs- Apply',
                 'vars' => $this->vars];

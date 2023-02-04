@@ -20,7 +20,7 @@ class User {
 
     public function loginSubmit() {
         if ($_POST['username'] != '' && $_POST['password'] != '') {
-            $user = $this->usersTable->find("username", $_POST['username']);
+            $user = $this->usersTable->find(["username"], ['value0' => $_POST['username']]);
 
             if (count($user) > 0 && $_POST['submit'] == 'Register') {
                 $this->vars['response'] = "Account already exists";

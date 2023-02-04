@@ -18,15 +18,15 @@ class Portal {
         $this->vars['table'] = 'job_table.html.php';
         if (isset($_GET['filter'])) {
             if ($_SESSION['userType'] == 'client') {
-                $this->vars['jobs'] = $this->jobsTable->find('clientId', $_SESSION['loggedin'], "categoryId", $_GET['filter']);
+                $this->vars['jobs'] = $this->jobsTable->find(['clientId', 'categoryId'], ['value0' => $_SESSION['loggedin'],'value1' => $_GET['filter']]);
             }
             else {
-                $this->vars['jobs'] = $this->jobsTable->find("categoryId", $_GET['filter']);
+                $this->vars['jobs'] = $this->jobsTable->find(["categoryId"], ['value0' => $_GET['filter']]);
             }
         } 
         else {
             if ($_SESSION['userType'] == 'client') {
-                $this->vars['jobs'] = $this->jobsTable->find('clientId', $_SESSION['loggedin']);
+                $this->vars['jobs'] = $this->jobsTable->find(['clientId'], ['value0' => $_SESSION['loggedin']]);
             }
             else {
                 $this->vars['jobs'] = $this->jobsTable->findAll();
@@ -66,7 +66,7 @@ class Portal {
 
     public function applicants() {
         $this->vars['table'] = 'applicant_table.html.php';
-        $this->vars['apps'] = $this->appsTable->find('jobId', $_GET['app_id']);
+        $this->vars['apps'] = $this->appsTable->find(['jobId'], ['value0' => $_GET['app_id']]);
         return ['template' => 'portal.html.php',
                 'title' => 'Jo\'s Jobs- Applicants',
                 'vars' => $this->vars];
@@ -74,10 +74,10 @@ class Portal {
 
     public function edit() { //TODO: finish this function
         if (isset($_GET['job_id'])) {
-            $this->vars['job'] = $this->jobsTable->find("id", $_GET['jod_id']);
+            $this->vars['job'] = $this->jobsTable->find(["id"], ['value0' => $_GET['jod_id']]);
         }
         if (isset($_GET['cat_id'])) {
-            $this->vars['cat'] = $this->catsTable->find("id", $_GET['cat_id']);
+            $this->vars['cat'] = $this->catsTable->find(["id"], ['value0' => $_GET['cat_id']]);
         }
     }
 

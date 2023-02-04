@@ -14,7 +14,7 @@ class Applicant {
     }
 
     public function getJob() {
-        return $this->jobsTable->find('id', $this->jobId)[0];
+        return $this->jobsTable->find(['id'], ['value0' => $this->jobId])[0];
     }
 }
 ?>
