@@ -14,7 +14,7 @@ class Jobs {
     }
 
     public function home() {
-        $this->vars['jobs'] = $this->jobsTable->find("closingDate", date("y-m-d"), "", "", ">", "DESC");
+        $this->vars['jobs'] = $this->jobsTable->find("closingDate", date("y-m-d"), "", "", ">", "", "DESC", "closingDate");
         return ['template' => 'home.html.php',
                 'title' => 'Jo\'s Jobs- Home',
                 'vars' => $this->vars
@@ -31,7 +31,7 @@ class Jobs {
                 $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id, "location", $_GET['filter']);
             }
             else {
-                $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id);
+                $this->vars['jobs'] = $this->jobsTable->find('categoryId', $cat[0]->id, "closingDate", date("y-m-d"), "=", ">");
 
             }
             $this->vars['heading'] = $cat[0]->name;

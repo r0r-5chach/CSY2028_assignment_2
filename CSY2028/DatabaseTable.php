@@ -36,12 +36,12 @@ class DatabaseTable {
         $this->pdo->prepare('UPDATE '. $this->table .' SET '. \implode(', ', $params) .' WHERE '. $this->pk .' = :primaryKey')->execute($record);
     }
 
-    public function find($column, $value, $column2 = "", $value2 = "", $comparator = "=", $order = "ASC") {
-        if ($column2 == "" && $value2 == "") {
+    public function find($column, $value, $column2 = "", $value2 = "", $comparator = "=", $comparator2 = "=", $order = "ASC", $orderColumn = "id") {
+        if ($column2 == "" || $value2 == "") {
             $values = [
                 'value' => $value
             ];
-            $stmt = $this->pdo->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' '. $comparator .' :value ORDER BY '. $column ." ". $order);
+            $stmt = $this->pdo->prepare('SELECT * FROM '.$this->table.' WHERE '.$column.' '.$comparator.' :value ORDER BY '.$orderColumn." ".$order);
             $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
             $stmt->execute($values);
             return $stmt->fetchAll();
@@ -51,7 +51,7 @@ class DatabaseTable {
                 'value' => $value,
                 'value2' => $value2
             ];
-            $stmt = $this->pdo->prepare('SELECT * FROM '. $this->table . ' WHERE '. $column . ' '. $comparator .' :value AND '. $column2 .' = :value2');
+            $stmt = $this->pdo->prepare('SELECT * FROM '.$this->table.' WHERE '.$column.' '.$comparator.' :value AND '.$column2.' '.$comparator2.' :value2 ORDER BY '.$orderColumn." ".$order);
             $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
             $stmt->execute($values);
             return $stmt->fetchAll();
