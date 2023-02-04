@@ -2,8 +2,10 @@
 namespace jobs;
 class Routes extends \CSY2028\Routes {
 
+    
+
     public function __construct() {
-        setDbTables();    
+        $this->setDbTables();    
         $this->controllers = [
             "jobs" => new \jobs\controllers\Jobs($this->databaseTables["jobs"], $this->databaseTables["categories"], $this->databaseTables["applicants"]),
             "portal" => new \jobs\controllers\Portal($this->databaseTables["categories"], $this->databaseTables["jobs"], $this->databaseTables["applicants"]),

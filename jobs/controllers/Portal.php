@@ -82,5 +82,10 @@ class Portal {
     }
 
     //TODO: add functions for adding jobs and categories
+    public function addJob() {
+        return ['template' => 'add.html.php',
+                'title' => 'Add Job',
+                'vars' => $this->vars];
+    }
 }
 ?>

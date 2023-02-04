@@ -17,7 +17,14 @@
 		    </section>
 	    </header>
         <nav>
-            <?=$nav?>
+			<ul>
+		    	<li><a href="/">Home</a></li>
+				<li>Jobs
+            		<?=$nav?>
+				</li>
+				<li><a href="/jobs/faq">FAQ</a></li>
+    			<li><a href="/jobs/about">About Us</a></li>
+			</ul>
         </nav>
         <img src="../images/randombanner.php"/>
             <?=$content;?>

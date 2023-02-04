@@ -10,14 +10,14 @@ Assignment 2:
         - Add cat name as new column in table @done
         - Add filter to be able to filter by cat @done
     - Allow customers to filter by location @done
-    - Move new framework into project
+    - Move new framework into project @done
     - Add admin user control to admin panel
     - Client user accounts
         - restricted admin panel @done
         - add and remove jobs
         - see who has applied for jobs @done
         - Client can only see their jobs @done
-    - Homepage has 10 jobs that are about to reach closing date
+    - Homepage has 10 jobs that are about to reach closing date @done
     - Contact form on contact page
         - forms store data in db
         - stored enquiries can be accessed from admin panel
@@ -29,7 +29,7 @@ Assignment 2:
     - Limit applications to jobs to 1 per email
     - Show number of applicants on job_table
     - Show job name at top of applicant_table
-    - Seperate jobs section from nav template
+    - Seperate jobs section from nav template @done
     - find where the 1 had come from @done
     - PHPUnit tests
     - Technical Documentation

@@ -1,5 +1,5 @@
 <h2>Jobs</h2>
-<a class="new" href="addjob.php">Add new job</a>
+<a class="new" href="/portal/addJob">Add new job</a>
 <form method="get" action="/portal">
 	<label for="filter">Filter:</label>
 	<select name="filter">

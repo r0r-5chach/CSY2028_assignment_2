@@ -1,8 +1,12 @@
 <main class = "sidebar">
     <section class="left">
         <ul>
-            <?php require 'nav.html.php'?>
-        </ul>
+			<?php foreach($cats as $cat) { ?>
+        		<li>
+            		<a href="/jobs/category?page=<?=urlencode($cat->name)?>"><?=$cat->name?></a>
+        		</li>
+    		<?php } ?> 
+		</ul>
     </section>
 
     <section class="right">
