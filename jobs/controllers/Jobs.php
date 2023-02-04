@@ -14,7 +14,7 @@ class Jobs {
     }
 
     public function home() {
-        $this->vars['jobs'] = $this->jobsTable->find("closingDate", date("y-m-d"), ">", "DESC");
+        $this->vars['jobs'] = $this->jobsTable->find("closingDate", date("y-m-d"), "", "", ">", "DESC");
         return ['template' => 'home.html.php',
                 'title' => 'Jo\'s Jobs- Home',
                 'vars' => $this->vars

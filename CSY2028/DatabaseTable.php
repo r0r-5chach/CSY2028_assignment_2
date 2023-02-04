@@ -36,7 +36,7 @@ class DatabaseTable {
         $this->pdo->prepare('UPDATE '. $this->table .' SET '. \implode(', ', $params) .' WHERE '. $this->pk .' = :primaryKey')->execute($record);
     }
 
-    public function find($column, $value, $comparator = "=", $order = "ASC", $column2 = "", $value2 = "") {
+    public function find($column, $value, $column2 = "", $value2 = "", $comparator = "=", $order = "ASC") {
         if ($column2 == "" && $value2 == "") {
             $values = [
                 'value' => $value
