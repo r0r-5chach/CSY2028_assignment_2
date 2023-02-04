@@ -25,7 +25,7 @@ Assignment 2:
         - Keep list of all previous enquieries and which admin dealt with it
     - Create entity classes for database entities (topic 18) @done
         - page 37-38 for implementation @done
-    - Restrict categories by jobs available past current date
+    - Restrict categories by jobs available past current date @done
     - Limit applications to jobs to 1 per email
     - Show number of applicants on job_table
     - Show job name at top of applicant_table
