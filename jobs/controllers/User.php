@@ -21,18 +21,7 @@ class User {
     public function loginSubmit() {
         if ($_POST['username'] != '' && $_POST['password'] != '') {
             $user = $this->usersTable->find(["username"], ['value0' => $_POST['username']]);
-
-            if (count($user) > 0 && $_POST['submit'] == 'Register') {
-                $this->vars['response'] = "Account already exists";
-            }
-            else if ($_POST['submit'] == "Register" && count($user) == 0) {
-                $record = ['username' => $_POST['username'],
-                            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                            'userType' => 'client'];
-                $this->usersTable->save($record);
-                $this->vars['response'] = 'You have now been registered';
-            }
-            else if ($_POST['submit'] == "Log In" && password_verify($_POST['password'], $user[0]->password)) {
+            if (password_verify($_POST['password'], $user[0]->password)) {
                 $user = $user[0];
                 $_SESSION['loggedin'] = $user->id;
                 $_SESSION['userType'] = $user->userType;
