@@ -1,4 +1,4 @@
-<h2>Applicants for job</h2>
+<h2>Applicants for <?=$job?></h2>
 <table>
 	<thead>
 		<tr>
