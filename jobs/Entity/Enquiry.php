@@ -15,10 +15,10 @@ class Enquiry {
     }
 
     public function getAdmin() {
-        if ($completed == 'y') {
+        if ($this->completed == 'y') {
             return $this->usersTable->find(['id'], ['value0' => $this->admin_id])[0];
         }
-        else {
+        else  {
             return 'N/A';
         }
 

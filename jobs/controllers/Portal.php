@@ -5,13 +5,15 @@ class Portal {
     private $jobsTable;
     private $appsTable;
     private $usersTable;
+    private $enquiryTable;
     private $vars;
 
-    public function __construct(\jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $appsTable, \jobs\JobDatabaseTable $usersTable) {
+    public function __construct(\jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $appsTable, \jobs\JobDatabaseTable $usersTable, \jobs\JobDatabaseTable $enquiryTable) {
         $this->catsTable = $catsTable;
         $this->jobsTable = $jobsTable;
         $this->appsTable = $appsTable;
         $this->usersTable = $usersTable;
+        $this->enquiryTable = $enquiryTable;
         $this->vars['cats'] = $this->catsTable->findAll();
         $this->vars['table'] = 'job_table.html.php';
     }
@@ -107,6 +109,27 @@ class Portal {
                     'vars' => $this->vars
             ];
         }
+    }
+
+    public function enquiries() {
+        if ($_SESSION['userType'] == 'admin') {
+            $this->vars['table'] = 'enquiry_table.html.php';
+            $this->vars['enqs'] = $this->enquiryTable->findAll();
+            return ['template' => 'portal.html.php',
+                    'title' => 'Jo\'s Jobs- Enquiries',
+                    'vars' => $this->vars
+            ];
+        }
+    }
+
+    public function enquiriesSubmit() {
+        $record = [
+            'id' => $_POST['enq_id'],
+            'completed' => 'y',
+            'admin_id' => $_SESSION['loggedin']
+        ];
+        $this->enquiryTable->save($record);
+        $this->enquiries();
     }
 
     public function addUser() {

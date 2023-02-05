@@ -22,11 +22,11 @@ Assignment 2:
         - see who has applied for jobs @done
         - Client can only see their jobs @done
     - Homepage has 10 jobs that are about to reach closing date @done
-    - Contact form on contact page
-        - forms store data in db
-        - stored enquiries can be accessed from admin panel
-        - can mark enquieries as Completed once admin has responded
-        - Keep list of all previous enquieries and which admin dealt with it
+    - Contact form on contact page @done
+        - forms store data in db @done
+        - stored enquiries can be accessed from admin panel @done
+        - can mark enquieries as Completed once admin has responded @done
+        - Keep list of all previous enquieries and which admin dealt with it @done
     - Create entity classes for database entities (topic 18) @done
         - page 37-38 for implementation @done
     - Restrict categories by jobs available past current date @done
