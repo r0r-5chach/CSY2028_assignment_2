@@ -39,6 +39,9 @@ class DatabaseTable {
     public function find($columns, $values, $comparators = ['=', '='], $order = "ASC", $orderColumn = "id") {
             $string = 'SELECT * FROM '.$this->table.' WHERE ';
             for ($i = 0; $i < count($values); $i++) {
+                if ($i > 0) {
+                    $string .= 'AND ';
+                }
                 $string .= $columns[$i].' '.$comparators[$i].' :value'.$i.' ';
             }
             $string .= 'ORDER BY '.$orderColumn.' '.$order;
