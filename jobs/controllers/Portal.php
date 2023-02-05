@@ -38,13 +38,18 @@ class Portal {
     }
 
     public function homeSubmit() {
-        if (isset($_POST['job_id'])) {
-            $this->jobsTable->delete("id", $_POST['job_id']);
-            return $this->home();
+        if ($_POST['submit'] == "List") { 
+            //TODO: Direct to edit job date
         }
-        if (isset($_POST['cat_id'])) {
-            $this->catsTable->delete("id", $_POST['cat_id']);
-            return $this->categories();
+        else { //TODO: Change to archive instead of delete
+            if (isset($_POST['job_id'])) {
+                $this->jobsTable->delete("id", $_POST['job_id']);
+                return $this->home();
+            }
+            if (isset($_POST['cat_id'])) {
+                $this->catsTable->delete("id", $_POST['cat_id']);
+                return $this->categories();
+            }
         }
     }
 
