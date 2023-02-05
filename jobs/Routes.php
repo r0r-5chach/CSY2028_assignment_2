@@ -23,8 +23,8 @@ class Routes extends \CSY2028\Routes {
     private function setDbTables() {
         $this->databaseTables = [];
         $this->databaseTables["categories"] = new \jobs\JobDatabaseTable('category', 'id', '\jobs\Entity\Category');
-        $this->databaseTables["jobs"] = new \jobs\JobDatabaseTable('job', 'id', '\jobs\Entity\Job', [$this->databaseTables["categories"]]);
-        $this->databaseTables["applicants"] = new \jobs\JobDatabaseTable('applicants', 'id', '\jobs\Entity\Applicant', [$this->databaseTables["jobs"]]);
+        $this->databaseTables["applicants"] = new \jobs\JobDatabaseTable('applicants', 'id', '\jobs\Entity\Applicant');
+        $this->databaseTables["jobs"] = new \jobs\JobDatabaseTable('job', 'id', '\jobs\Entity\Job', [$this->databaseTables["categories"], $this->databaseTables['applicants']]);
         $this->databaseTables["users"] = new \jobs\JobDatabaseTable('users', 'id', '\jobs\Entity\User');
     }
 }
