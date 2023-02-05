@@ -11,10 +11,13 @@ Assignment 2:
         - Add filter to be able to filter by cat @done
     - Allow customers to filter by location @done
     - Move new framework into project @done
-    - Add admin user control to admin panel
+    - Fix Adding categories
+    - Archive jobs instead of delete
+    - Add admin user control to admin portal
+        - User accounts made in admin portal
     - Client user accounts
         - restricted admin panel @done
-        - add and remove jobs
+        - add and archive jobs
         - see who has applied for jobs @done
         - Client can only see their jobs @done
     - Homepage has 10 jobs that are about to reach closing date @done
@@ -26,9 +29,9 @@ Assignment 2:
     - Create entity classes for database entities (topic 18) @done
         - page 37-38 for implementation @done
     - Restrict categories by jobs available past current date @done
-    - Limit applications to jobs to 1 per email
-    - Show number of applicants on job_table
-    - Show job name at top of applicant_table
+    - Limit applications to jobs to 1 per email @done
+    - Show number of applicants on job_table @done
+    - Show job name at top of applicant_table @done
     - Seperate jobs section from nav template @done
     - find where the 1 had come from @done
     - PHPUnit tests
