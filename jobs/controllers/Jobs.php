@@ -37,7 +37,7 @@ class Jobs {
                 $this->vars['jobs'] = $this->jobsTable->find($columns, $values, $comparators);
             }
             else {
-                $this->vars['jobs'] = $this->jobsTable->find(['categoryId', "closingDate"], ["value0" => $cat[0]->id, "value1" => date("y-m-d")], ["=", ">"]);
+                $this->vars['jobs'] = $this->jobsTable->find(['categoryId', 'closingDate'], ["value0" => $cat[0]->id, "value1" => date("y-m-d")], ["=", ">"]);
 
             }
             $this->vars['heading'] = $cat[0]->name;
@@ -85,8 +85,13 @@ class Jobs {
                 'jobId' => $_POST['jobId'],
                 'cv' => $fileName
             ];
-            $this->appsTable->save($record);
-            $this->vars['response'] = 'Your application is complete. We will contact you after the closing date.';
+            if (count($this->appsTable->find(['email', 'jobId'], ['value0' => $_POST['email'], 'value1' => $_POST['jobId']])) > 0) {
+                $this->vars['response'] = 'You have already applied for this job';
+            }
+            else {
+                $this->appsTable->save($record);
+                $this->vars['response'] = 'Your application is complete. We will contact you after the closing date.';
+            }
         }
         else {
             $this->vars['response'] = 'There was an error uploading your CV';
