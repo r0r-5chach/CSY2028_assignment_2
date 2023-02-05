@@ -8,7 +8,7 @@
         <label>Enter Password</label>
         <input type="password" name="password" />
 
-        <input type="submit" name="submit" value="Log In" />
+        <input type="submit" name="submit"/>
     </form>
 </main>
 <p><?=nl2br($response)?></p>

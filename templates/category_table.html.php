@@ -1,5 +1,5 @@
 <h2>Categories</h2>
-<a class="new" href="addcategory.php">Add new category</a>
+<a class="new" href="/portal/addCategory">Add new category</a>
 <table>
     <thead>
 	    <tr>

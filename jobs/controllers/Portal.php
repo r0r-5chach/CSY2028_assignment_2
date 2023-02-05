@@ -56,12 +56,6 @@ class Portal {
                 'title' => 'Jo\'s Jobs- Categories',
                 'vars' => $this->vars];
         }
-        else {
-            $this->vars['response'] = 'You do not have access to this page';
-            return ['template' => 'response.html.php',
-                    'title' => 'Jo\'s Jobs- Access Denied',
-                    'vars' => $this->vars];
-        }
     }
 
     public function applicants() {
@@ -86,8 +80,38 @@ class Portal {
     //TODO: add functions for adding jobs and categories
     public function addJob() {
         return ['template' => 'add.html.php',
-                'title' => 'Add Job',
-                'vars' => $this->vars];
+                'title' => 'Jo\'s Jobs- Add Job',
+                'vars' => $this->vars
+        ];
+    }
+
+    public function addCategory() {
+        if ($_SESSION['userType'] == 'admin') {
+            return ['template' => 'category_add.html.php',
+                    'title' => 'Jo\'s Jobs- Add Category',
+                    'vars' => $this->vars
+            ];
+        }
+    }
+
+    public function addCategorySubmit() {
+        if ($_SESSION['userType'] == 'admin') {
+            
+            if (count($this->catsTable->find(['name'], ['value0' => $_POST['name']])) > 0) {
+                $this->vars['response'] = 'This category already exists';
+            }
+            else {
+                $record = [
+                    'name' => $_POST['name']
+                ];
+                $this->catsTable->save($record);
+                $this->vars['response'] = 'Category Created';
+            }
+            return ['template' => 'response.html.php',
+                    'title' => 'Jo\'s Jobs- Add Category',
+                    'vars' => $this->vars
+            ];
+        }
     }
 }
 ?>
