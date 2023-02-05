@@ -9,6 +9,7 @@ class Job {
     public $location;
     public $categoryId;
     public $clientId;
+    public $archived;
     private $catsTable;
     private $appsTable;
 

@@ -14,7 +14,7 @@ class Jobs {
     }
 
     public function home() {
-        $this->vars['jobs'] = $this->jobsTable->find(["closingDate"], ['value0' => date('y-m-d')], ['>'], "DESC", "closingDate");
+        $this->vars['jobs'] = $this->jobsTable->find(["closingDate", 'archived'], ['value0' => date('y-m-d'), 'value1' => 'n'], ['>', '='], "DESC", "closingDate");
         return ['template' => 'home.html.php',
                 'title' => 'Jo\'s Jobs- Home',
                 'vars' => $this->vars
@@ -28,16 +28,17 @@ class Jobs {
         }
         else {
             if (isset($_GET['filter'])) {
-                $columns = ['categoryId', "location", 'closingDate'];
+                $columns = ['categoryId', "location", 'closingDate', 'archived'];
                 $values = ['value0' => $cat[0]->id, 
                             'value1' => $_GET['filter'],
-                            'value2' => date('y-m-d')
+                            'value2' => date('y-m-d'),
+                            'value3' => 'n'
                 ];
-                $comparators = ["=","=",">"];
+                $comparators = ["=","=",">",'='];
                 $this->vars['jobs'] = $this->jobsTable->find($columns, $values, $comparators);
             }
             else {
-                $this->vars['jobs'] = $this->jobsTable->find(['categoryId', 'closingDate'], ["value0" => $cat[0]->id, "value1" => date("y-m-d")], ["=", ">"]);
+                $this->vars['jobs'] = $this->jobsTable->find(['categoryId', 'closingDate', 'archived'], ["value0" => $cat[0]->id, "value1" => date("y-m-d"), 'value2' => 'n'], ["=", ">", '=']);
 
             }
             $this->vars['heading'] = $cat[0]->name;

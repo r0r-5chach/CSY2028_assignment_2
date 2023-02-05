@@ -41,9 +41,13 @@ class Portal {
         if ($_POST['submit'] == "List") { 
             //TODO: Direct to edit job date
         }
-        else { //TODO: Change to archive instead of delete
+        else {
             if (isset($_POST['job_id'])) {
-                $this->jobsTable->delete("id", $_POST['job_id']);
+                $record = [
+                    'id' => $_POST['job_id'],
+                    'archived' => 'y'
+                ];
+                $this->jobsTable->save($record);
                 return $this->home();
             }
             if (isset($_POST['cat_id'])) {
