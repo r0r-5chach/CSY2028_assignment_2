@@ -1,12 +1,7 @@
 <main class="home">
     <form method="post" action="/portal/addJob">
-        <?php if ($archive) { ?>
-            <input type="hidden" name="archived" value="n"/>
-        <?php }
-            else { ?>
+           <?php if ($update) {?>
                 <input type="hidden" name="archived" value="<?=$job->archived?>"/>
-        <?php }
-            if ($update) {?>
                 <label>Enter Job Title</label>
                 <input type="text" name="title" value="<?=$job->title?>"/>
                 <label>Enter Job Description</label>
@@ -23,7 +18,11 @@
                 <input type="hidden" name="jobId" value="<?=$job->id?>"/>
                 <input type="submit" name="submit" value="Update"/>
         <?php }
+            else if ($archive) { ?>
+                <input type="hidden" name="archived" value="n"/>
+        <?php }
             else { ?>
+                <input type="hidden" name="archived" value="n"/>
                 <label>Enter Job Title</label>
                 <input type="text" name="title"/>
                 <label>Enter Job Description</label>

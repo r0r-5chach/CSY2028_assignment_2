@@ -4,7 +4,7 @@
                 <label>Enter Username</label>
                 <input type="username" name="username" value="<?=$user->username?>"/>
                 <label>Enter Password</label>
-                <input type="password" name="password" value="<?=$user->password?>"/>
+                <input type="password" name="password" value=""/>
                 <label>Enter User Type</label>
                 <input type="text" name="type" value="<?=$user->userType?>"/>
                 <input type="hidden" name="user_id" value="<?=$user->id?>" />

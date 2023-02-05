@@ -150,24 +150,26 @@ class Portal {
 
     public function addUserSubmit() {
         if ($_SESSION['userType'] == 'admin') {
-            $record = [
-                'username' => $_POST['username'],
-                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                'userType' => $_POST['type']
-            ];
-            if ($_POST['submit'] == 'Update') {
-                $record['id'] = $_POST['user_id'];
-                $this->vars['response'] = 'User Updated Successfully';
+                if($_POST['password'] != "") {
+                $record = [
+                    'username' => $_POST['username'],
+                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'userType' => $_POST['type']
+                ];
+                if ($_POST['submit'] == 'Update') {
+                    $record['id'] = $_POST['user_id'];
+                    $this->vars['response'] = 'User Updated Successfully';
+                }
+                else {
+                    $this->vars['response'] = 'User Created Successfully';
+                }
+                $this->usersTable->save($record);
+                return [
+                    'template' => 'response.html.php',
+                    'title' => 'Jo\'s Jobs- Edit user',
+                    'vars' => $this->vars
+                ];
             }
-            else {
-                $this->vars['response'] = 'User Created Successfully';
-            }
-            $this->usersTable->save($record);
-            return [
-                'template' => 'response.html.php',
-                'title' => 'Jo\'s Jobs- Edit user',
-                'vars' => $this->vars
-            ];
         }
     }
 
