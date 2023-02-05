@@ -24,6 +24,7 @@
 				</li>
 				<li><a href="/jobs/faq">FAQ</a></li>
     			<li><a href="/jobs/about">About Us</a></li>
+				<li><a href="/jobs/contact">Contact</a></li>
 			</ul>
         </nav>
         <img src="../images/randombanner.php"/>

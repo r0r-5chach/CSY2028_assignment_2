@@ -4,12 +4,14 @@ class Jobs {
     private $jobsTable;
     private $catsTable;
     private $appsTable;
+    private $enquiryTable;
     private $vars = [];
 
-    public function __construct(\jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $appsTable) {
+    public function __construct(\jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $appsTable, \jobs\JobDatabaseTable $enquiryTable) {
         $this->jobsTable = $jobsTable;
         $this->catsTable = $catsTable;
         $this->appsTable = $appsTable;
+        $this->enquiryTable = $enquiryTable;
         $this->vars['cats'] = $this->catsTable->findAll();
     }
 
@@ -56,6 +58,26 @@ class Jobs {
     ];
     }
 
+    public function contact() {
+        return ['template' => 'contact.html.php',
+                'title' => 'Jo\'s Jobs- Contact',
+                'vars' => $this->vars
+        ];
+    }
+
+    public function contactSubmit() {
+        $record = [
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'telephone' => $_POST['number'],
+            'enquiry' => $_POST['enquiry']
+        ];
+        $this->enquiryTable->save($record);
+        $this->vars['response'] = 'Enquiry Sent';
+        return ['template' => 'response.html.php',
+                'title' => 'Jo\'s Jobs- Enquiry Sent',
+                'vars' => $this->vars];
+    }
 
     public function notFound() {
         $this->vars['response'] = 'The page you have requested has not been found';
