@@ -34,10 +34,10 @@
 						echo 'yes';
 					} ?>
 				</td>
-				<td><a style="float: right" href="portal/edit?job_id=<?=$job->id?>">Edit</a></td>
+				<td><a style="float: right" href="portal/addJob?job_id=<?=$job->id?>">Edit</a></td>
 				<td><a style="float: right" href="portal/applicants?job_id=<?=$job->id?>">View applicants (<?=count($job->getApps())?>)</a></td>
 				<td>
-					<form method="post" action="portal/">
+					<form method="post" action="portal">
 						<input type="hidden" name="job_id" value="<?=$job->id?>" />
 						<?php if ($job->archived == 'n') { ?>
 							<input type="submit" name="submit" value="Archive" />

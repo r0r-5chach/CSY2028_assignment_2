@@ -40,7 +40,9 @@ class Portal {
     public function homeSubmit() {
         if ($_POST['submit'] == "List") {
             $this->vars['job'] = $this->jobsTable->find(['id'], ['value0' => $_POST['job_id']])[0]; 
-            return ['template' => 'job_edit.html.php',
+            $this->vars['archive'] = true;
+            $this->vars['update'] = true;
+            return ['template' => 'job_add.html.php',
                     'title' => 'Jo\'s Jobs- Update Job',
                     'vars' => $this->vars];
         }
@@ -55,20 +57,17 @@ class Portal {
             }
             if (isset($_POST['cat_id'])) {
                 $this->catsTable->delete("id", $_POST['cat_id']);
+                $jobs = $this->jobsTable->find(['categoryId'], ['value0' => $_POST['cat_id']]);
+                foreach ($jobs as $job) {
+                    $this->jobsTable->delete("id", $job->id);
+                }
                 return $this->categories();
             }
         }
     }
 
     public function secondHomeSubmit() {
-        if(isset($_POST['archived'])) {
-            $record = [
-                'id' => $_POST['jobId'],
-                'closingDate' => $_POST['closingDate'],
-                'archived' => $_POST['archived']
-            ];
-            $this->jobsTable->save($record);
-        }
+       
         $this->vars['response'] = 'Update successful';
         return ['template' => 'response.html.php',
                 'title' => 'Jo\'s Jobs- Success',
@@ -97,15 +96,21 @@ class Portal {
     }
 
     public function edit() { //TODO: finish this function
-        if (isset($_GET['job_id'])) {
-            $this->vars['job'] = $this->jobsTable->find(["id"], ['value0' => $_GET['job_id']]);
-        }
         if (isset($_GET['cat_id'])) {
             $this->vars['cat'] = $this->catsTable->find(["id"], ['value0' => $_GET['cat_id']]);
         }
     }
 
     public function addJob() {
+        if (isset($_GET['job_id'])) {
+            $this->vars['job'] = $this->jobsTable->find(["id"], ['value0' => $_GET['job_id']])[0];
+            $this->vars['archive'] = false;
+            $this->vars['update'] = true;
+        }
+        else {
+            $this->vars['archive'] = false;
+            $this->vars['update'] = false;
+        }
         return ['template' => 'job_add.html.php',
                 'title' => 'Jo\'s Jobs- Add Job',
                 'vars' => $this->vars
@@ -113,7 +118,7 @@ class Portal {
     }
 
     public function addJobSubmit() {
-        if (count($this->jobsTable->find(['title', 'clientId'], ['value0' => $_POST['title'], 'value1' => $_POST['client_id']])) == 0 && $this->catsTable->find(['name'], ['value0' => $_POST['categoryName']]) != 0) {
+        if ($this->catsTable->find(['name'], ['value0' => $_POST['categoryName']]) != 0) {
             $record = [
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
@@ -121,17 +126,26 @@ class Portal {
                 'closingDate' => $_POST['closingDate'],
                 'categoryId' => $this->catsTable->find(['name'], ['value0' => $_POST['categoryName']])[0]->id,
                 'location' => $_POST['location'],
-                'clientId' => $_POST['client_id']
+                'clientId' => $_POST['client_id'],
+                'archived' => $_POST['archived']
             ];
-            $this->jobsTable->save($record);
-            $this->vars['response'] = 'Job made successfully';
+
+            if ($_POST['submit'] == 'Create' && count($this->jobsTable->find(['title', 'clientId'], ['value0' => $_POST['title'], 'value1' => $_POST['client_id']])) == 0) {    
+                $this->jobsTable->save($record);
+                $this->vars['response'] = 'Job made successfully';
+            }
+            else if ($_POST['submit'] == 'Update') {
+                $record['id'] = $_POST['jobId'];
+                $this->jobsTable->save($record);
+                $this->vars['response'] = 'Job updated successfully';
+            }
         }
         else {
             $this->vars['response'] = 'Some data was incorrect';
         }
 
         return ['template' => 'response.html.php',
-                'title' => 'Jo\'s Jobs- Add Job',
+                'title' => 'Jo\'s Jobs- Edit Job',
                 'vars' => $this->vars
         ];
     }

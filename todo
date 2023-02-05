@@ -16,7 +16,7 @@ Assignment 2:
     - Relist archived jobs with new closing date @done
     - Add admin user control to admin portal
         - User accounts made in admin portal
-    - Client user accounts
+    - Client user accounts @done
         - restricted admin panel @done
         - add and archive jobs @done
         - see who has applied for jobs @done
