@@ -20,14 +20,14 @@ class DatabaseTable {
         $this->pdo = new \PDO('mysql:dbname='.$this->schema.';host='.$this->server, $this->username, $this->password);
     }
 
-    private function insert($record) {
+    private function insert($record) { //Insert record into table
         $keys = \array_keys($record);
         $columns = \implode(', ', $keys);
         $values = \implode(', :', $keys);
         $this->pdo->prepare('INSERT INTO '. $this->table . ' (' . $columns . ') VALUES (:' . $values . ')')->execute($record);
     }
     
-    private function update($record) {
+    private function update($record) { //Update record in table
         $params = [];
         foreach ($record as $key => $value) {
             $params[] = $key . ' = :' .$key;
@@ -36,7 +36,7 @@ class DatabaseTable {
         $this->pdo->prepare('UPDATE '. $this->table .' SET '. \implode(', ', $params) .' WHERE '. $this->pk .' = :primaryKey')->execute($record);
     }
 
-    public function find($columns, $values, $comparators = ['=', '='], $order = "ASC", $orderColumn = "id") {
+    public function find($columns, $values, $comparators = ['=', '='], $order = "ASC", $orderColumn = "id") { //Find rows in table
             $string = 'SELECT * FROM '.$this->table.' WHERE ';
             for ($i = 0; $i < count($values); $i++) {
                 if ($i > 0) {
@@ -51,21 +51,21 @@ class DatabaseTable {
             return $stmt->fetchAll();
     }
     
-    public function findAll() {
+    public function findAll() { //Find all rows in table
         $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->table);
         $stmt->setFetchMode(\PDO::FETCH_CLASS, $this->entityClass, $this->entityConstructor);
         $stmt->execute();
         return $stmt->fetchAll();
     }
     
-    public function delete($column, $value) {
+    public function delete($column, $value) { //Delete row from table
         $values = [
             'value' => $value
         ];
         $this->pdo->prepare('DELETE FROM '. $this->table .' WHERE '. $column .' = :value')->execute($values);
     }
     
-    public function save($record) {
+    public function save($record) { //Save record to table
         if (empty($record[$this->pk])) {
             unset($record[$this->pk]);
         }

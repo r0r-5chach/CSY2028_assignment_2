@@ -11,14 +11,14 @@ class User {
         $this->vars['cats'] = $this->catsTable->findAll();
         $this->vars['response'] = '';
     }
-
-    public function login() {
+    //Login page
+    public function login() { //Route: jobs.v.je/user/login
         return ['template' => 'login.html.php',
                 'title' => 'Jo\'s Jobs- Login',
                 'vars' => $this->vars];
     }
-
-    public function loginSubmit() {
+    //Login page POST
+    public function loginSubmit() { //Route: jobs.v.je/user/login
         if ($_POST['username'] != '' && $_POST['password'] != '') {
             $user = $this->usersTable->find(["username"], ['value0' => $_POST['username']]);
             if (password_verify($_POST['password'], $user[0]->password)) {
@@ -49,8 +49,8 @@ class User {
                     'vars' => $this->vars
         ];
     }
-
-    public function logout() {
+    //Logout page
+    public function logout() { //Route: jobs.v.je/user/logout
         unset($_SESSION['loggedin']);
         unset($_SESSION['userType']);
         $this->vars['response'] = 'Logged Out Successfully';

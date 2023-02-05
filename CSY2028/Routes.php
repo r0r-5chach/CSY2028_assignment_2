@@ -11,7 +11,7 @@ class Routes {
         $this->loginControllers = [];
     }
 
-    public function getController($controllerName, $functionName) {
+    public function getController($controllerName, $functionName) { //get controller 
         
         $this->checkLogin($controllerName);
 
@@ -29,11 +29,11 @@ class Routes {
 
     }
 
-    public function getDefaultRoute() {
+    public function getDefaultRoute() { //Default request route
        return 'controller/home';
     }
 
-    public function checkLogin($name) {
+    public function checkLogin($name) { //Check if controller requires user to be logged in
         $requiresLogin = $this->loginControllers[$name] ?? false;
 
         if ($requiresLogin && !isset($_SESSION['loggedin'])) {
@@ -42,7 +42,7 @@ class Routes {
         }
 
     }
-
+    //404 Page
     public function notFound() {
         return ['template' => 'response.html.php',
                 'title' => '404 Not Found',

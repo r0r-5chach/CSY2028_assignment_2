@@ -1,6 +1,6 @@
 <?php
 namespace jobs\Entity;
-class Job {
+class Job { //Represents Job Entity from jobs table
     public $id;
     public $title;
     public $description;
@@ -18,11 +18,11 @@ class Job {
         $this->appsTable = $appsTable;
     }
 
-    public function getCat() {
+    public function getCat() { //Get category job is in
         return $this->catsTable->find(['id'], ['value0' => $this->categoryId])[0];
     }
 
-    public function getApps() {
+    public function getApps() { //Get applicants for job
         return $this->appsTable->find(['jobId'], ['value0' => $this->id]);
     }
 }

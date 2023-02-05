@@ -7,14 +7,14 @@ class EntryPoint {
         $this->routes = $routes;
     }
 
-    public function loadTemplate($fileName, $templateData) {
+    public function loadTemplate($fileName, $templateData) { //Load HTML template
         \extract($templateData);
         \ob_start();
         require $fileName;
         return \ob_get_clean();  
     }
 
-    public function run() {
+    public function run() { //run response
         $route = \ltrim(\explode('?', $_SERVER['REQUEST_URI'])[0], '/');
 
 

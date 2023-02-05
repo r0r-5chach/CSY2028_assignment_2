@@ -1,6 +1,6 @@
 <?php
 namespace jobs;
-class Routes extends \CSY2028\Routes {
+class Routes extends \CSY2028\Routes { //Represents the routes for this site
 
     
 

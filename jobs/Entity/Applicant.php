@@ -1,6 +1,6 @@
 <?php
 namespace jobs\Entity;
-class Applicant {
+class Applicant { //Represents Applicant Entity from applicants table
     public $id;
     public $name;
     public $email;

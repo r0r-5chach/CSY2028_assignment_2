@@ -14,22 +14,22 @@ class Jobs {
         $this->enquiryTable = $enquiryTable;
         $this->vars['cats'] = $this->catsTable->findAll();
     }
-
-    public function home() {
+    //Homepage
+    public function home() { //Route: jobs.v.je/jobs/home
         $this->vars['jobs'] = $this->jobsTable->find(["closingDate", 'archived'], ['value0' => date('y-m-d'), 'value1' => 'n'], ['>', '='], "DESC", "closingDate");
         return ['template' => 'home.html.php',
                 'title' => 'Jo\'s Jobs- Home',
                 'vars' => $this->vars
             ];
     }
-
-    public function category() {
+    //Category pages
+    public function category() { //Route: jobs.v.je/jobs/category
         $cat = $this->catsTable->find(['name'], ['value0' => $_GET['page']]);
         if ($cat == null) {
             return $this->notFound();
         }
         else {
-            if (isset($_GET['filter'])) {
+            if (isset($_GET['filter'])) { //location filter for jobs
                 $columns = ['categoryId', "location", 'closingDate', 'archived'];
                 $values = ['value0' => $cat[0]->id, 
                             'value1' => $_GET['filter'],
@@ -50,22 +50,22 @@ class Jobs {
         ];
         }
     }
-
-    public function about() {
+    //About page
+    public function about() { //Route: jobs.v.je/jobs/about
         return ['template' => 'about.html.php',
                 'title' => 'Jo\'s Jobs- About us',
                 'vars' => $this->vars
     ];
     }
-
-    public function contact() {
+    //Contact page
+    public function contact() { //Route: jobs.v.je/jobs/contact
         return ['template' => 'contact.html.php',
                 'title' => 'Jo\'s Jobs- Contact',
                 'vars' => $this->vars
         ];
     }
-
-    public function contactSubmit() {
+    //Contact page POST
+    public function contactSubmit() { //Route: jobs.v.je/jobs/contact
         $record = [
             'name' => $_POST['name'],
             'email' => $_POST['email'],
@@ -78,24 +78,24 @@ class Jobs {
                 'title' => 'Jo\'s Jobs- Enquiry Sent',
                 'vars' => $this->vars];
     }
-
-    public function notFound() {
+    //404 page
+    public function notFound() { //Route: jobs.v.je/jobs/notFound
         $this->vars['response'] = 'The page you have requested has not been found';
         return ['template' => 'response.html.php',
                 'title' => 'Jo\'s Jobs- 404 Not Found',
                 'vars' => $this->vars
     ];
     }
-
-    public function apply() {
+    //Job Application page
+    public function apply() { //Route: jobs.v.je/jobs/apply
         $this->vars['job'] = $this->jobsTable->find(['id'], ["value0" => $_GET['id']])[0];
         return ['template' => 'apply.html.php',
                 'title' => 'Jo\'s Jobs- Apply',
                 'vars' => $this->vars];
 
     }
-
-    public function applySubmit() {
+    //Job Application page POST
+    public function applySubmit() { //Route: jobs.v.je/jobs/apply
         if ($_FILES['cv']['error'] == 0) {
             $parts = explode('.', $_FILES['cv']['name']);
             $extension = end($parts);
@@ -125,8 +125,8 @@ class Jobs {
                 'vars' => $this->vars];
 
     }
-
-    public function faq() {
+    //FAQ Page
+    public function faq() { //Route: jobs.v.je/jobs/faq
         return ['template' => 'construction.html.php',
                 'title' => 'Jo\'s Jobs- FAQ',
                 'vars' => $this->vars];

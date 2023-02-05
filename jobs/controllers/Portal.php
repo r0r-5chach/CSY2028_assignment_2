@@ -17,8 +17,8 @@ class Portal {
         $this->vars['cats'] = $this->catsTable->findAll();
         $this->vars['table'] = 'job_table.html.php';
     }
-
-    public function home() {
+    //Portal homepage
+    public function home() { //Route: jobs.v.je/portal/
         $this->vars['table'] = 'job_table.html.php';
         if (isset($_GET['filter'])) {
             if ($_SESSION['userType'] == 'client') {
@@ -40,9 +40,9 @@ class Portal {
                 'title' => 'Jo\'s Jobs- Jobs',
                 'vars' => $this->vars];
     }
-
-    public function homeSubmit() {
-        if ($_POST['submit'] == "List") {
+    //Portal homepage POST
+    public function homeSubmit() { //Route: jobs.v.je/portal/
+        if ($_POST['submit'] == "List") { //Relist archived job
             $this->vars['job'] = $this->jobsTable->find(['id'], ['value0' => $_POST['job_id']])[0]; 
             $this->vars['archive'] = true;
             $this->vars['update'] = true;
@@ -51,7 +51,7 @@ class Portal {
                     'vars' => $this->vars];
         }
         else {
-            if (isset($_POST['job_id'])) {
+            if (isset($_POST['job_id'])) { //archive job
                 $record = [
                     'id' => $_POST['job_id'],
                     'archived' => 'y'
@@ -59,7 +59,7 @@ class Portal {
                 $this->jobsTable->save($record);
                 return $this->home();
             }
-            if (isset($_POST['cat_id'])) {
+            if (isset($_POST['cat_id'])) { //delete category
                 $this->catsTable->delete("id", $_POST['cat_id']);
                 $jobs = $this->jobsTable->find(['categoryId'], ['value0' => $_POST['cat_id']]);
                 foreach ($jobs as $job) {
@@ -67,7 +67,7 @@ class Portal {
                 }
                 return $this->categories();
             }
-            if (isset($_POST['user_id'])) {
+            if (isset($_POST['user_id'])) { //delete user
                 if($_POST['user_type'] == 'client') {
                     $this->usersTable->delete('id', $_POST['user_id']);
                     $jobs = $this->jobsTable->find(['clientId'], ['value0' => $_POST['user_id']]);
@@ -79,8 +79,8 @@ class Portal {
             }
         }
     }
-
-    public function categories() {
+    //Categories Portal page
+    public function categories() { //Route: jobs.v.je/portal/categories
         if ($_SESSION['userType'] == 'admin') {
             $this->vars['table'] = 'category_table.html.php';
             $this->vars['cats'] = $this->catsTable->findAll();
@@ -89,8 +89,8 @@ class Portal {
                 'vars' => $this->vars];
         }
     }
-
-    public function applicants() {
+    //Applicants Portal page
+    public function applicants() { //Route: jobs.v.je/portal/applicants
         $job = $this->jobsTable->find(['id'], ['value0' => $_GET['job_id']])[0];
         $this->vars['table'] = 'applicant_table.html.php';
         $this->vars['apps'] = $job->getApps();
@@ -99,8 +99,8 @@ class Portal {
                 'title' => 'Jo\'s Jobs- Applicants',
                 'vars' => $this->vars];
     }
-
-    public function users() {
+    //Users Portal page
+    public function users() { //Route: jobs.v.je/portal/users
         if ($_SESSION['userType'] == 'admin') {
             $this->vars['table'] = 'user_table.html.php';
             $this->vars['users'] = $this->usersTable->findAll();
@@ -110,8 +110,8 @@ class Portal {
             ];
         }
     }
-
-    public function enquiries() {
+    //Enquiries Portal page
+    public function enquiries() { //Route: jobs.v.je/portal/enquiries
         if ($_SESSION['userType'] == 'admin') {
             $this->vars['table'] = 'enquiry_table.html.php';
             $this->vars['enqs'] = $this->enquiryTable->findAll();
@@ -121,8 +121,8 @@ class Portal {
             ];
         }
     }
-
-    public function enquiriesSubmit() {
+    //Enquiries Portal page POST
+    public function enquiriesSubmit() { //Route: jobs.v.je/portal/enquiries
         $record = [
             'id' => $_POST['enq_id'],
             'completed' => 'y',
@@ -131,14 +131,14 @@ class Portal {
         $this->enquiryTable->save($record);
         $this->enquiries();
     }
-
-    public function addUser() {
+    //Edit User Portal page
+    public function addUser() { //Route: jobs.v.je/portal/addUser
         if ($_SESSION['userType'] == 'admin') {
-            if (isset($_GET['user_id'])) {
+            if (isset($_GET['user_id'])) { //Update user
                 $this->vars['user'] = $this->usersTable->find(['id'], ['value0' => $_GET['user_id']])[0];
                 $this->vars['update'] = true;
             }
-            else {
+            else { //Create user
                 $this->vars['update'] = false;
             }
             return ['template' => 'user_add.html.php',
@@ -147,7 +147,7 @@ class Portal {
             ];
         }
     }
-
+    //Edit User Portal page POST
     public function addUserSubmit() {
         if ($_SESSION['userType'] == 'admin') {
                 if($_POST['password'] != "") {
@@ -172,14 +172,14 @@ class Portal {
             }
         }
     }
-
-    public function addJob() {
-        if (isset($_GET['job_id'])) {
+    //Edit Job Portal page
+    public function addJob() { //Route: jobs.v.je/portal/addJob
+        if (isset($_GET['job_id'])) { //Update Job
             $this->vars['job'] = $this->jobsTable->find(["id"], ['value0' => $_GET['job_id']])[0];
             $this->vars['archive'] = false;
             $this->vars['update'] = true;
         }
-        else {
+        else { //Create Job
             $this->vars['archive'] = false;
             $this->vars['update'] = false;
         }
@@ -188,8 +188,8 @@ class Portal {
                 'vars' => $this->vars
         ];
     }
-
-    public function addJobSubmit() {
+    //Edit Job page POST
+    public function addJobSubmit() { //Route: jobs.v.je/portal/addJob
         if ($this->catsTable->find(['name'], ['value0' => $_POST['categoryName']]) != 0) {
             $record = [
                 'title' => $_POST['title'],
@@ -221,8 +221,8 @@ class Portal {
                 'vars' => $this->vars
         ];
     }
-
-    public function addCategory() {
+    //Edit Category page
+    public function addCategory() { //Route: jobs.v.je/portal/addCategory
         if ($_SESSION['userType'] == 'admin') {
             if (isset($_GET['cat_id'])) {
                 $this->vars['cat'] = $this->catsTable->find(["id"], ['value0' => $_GET['cat_id']])[0];
@@ -237,8 +237,8 @@ class Portal {
             ];
         }
     }
-
-    public function addCategorySubmit() {
+    //Edit Category page POST
+    public function addCategorySubmit() { //Route: jobs.v.je/portal/addCategory
         if ($_SESSION['userType'] == 'admin') {
             if ($_POST['submit'] == 'Create') {
                 if (count($this->catsTable->find(['name'], ['value0' => $_POST['name']])) > 0) {

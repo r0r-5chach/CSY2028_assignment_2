@@ -1,6 +1,6 @@
 <?php
 namespace jobs\Entity;
-class User {
+class User { //Represents User Entity from userss table
     public $id;
     public $username;
     public $password;
