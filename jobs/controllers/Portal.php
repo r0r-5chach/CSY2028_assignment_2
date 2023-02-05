@@ -38,8 +38,11 @@ class Portal {
     }
 
     public function homeSubmit() {
-        if ($_POST['submit'] == "List") { 
-            //TODO: Direct to edit job date
+        if ($_POST['submit'] == "List") {
+            $this->vars['job'] = $this->jobsTable->find(['id'], ['value0' => $_POST['job_id']])[0]; 
+            return ['template' => 'job_edit.html.php',
+                    'title' => 'Jo\'s Jobs- Update Job',
+                    'vars' => $this->vars];
         }
         else {
             if (isset($_POST['job_id'])) {
@@ -55,6 +58,22 @@ class Portal {
                 return $this->categories();
             }
         }
+    }
+
+    public function secondHomeSubmit() {
+        if(isset($_POST['archived'])) {
+            $record = [
+                'id' => $_POST['jobId'],
+                'closingDate' => $_POST['closingDate'],
+                'archived' => $_POST['archived']
+            ];
+            $this->jobsTable->save($record);
+        }
+        $this->vars['response'] = 'Update successful';
+        return ['template' => 'response.html.php',
+                'title' => 'Jo\'s Jobs- Success',
+                'vars' => $this->vars
+        ];
     }
 
     public function categories() {
@@ -79,7 +98,7 @@ class Portal {
 
     public function edit() { //TODO: finish this function
         if (isset($_GET['job_id'])) {
-            $this->vars['job'] = $this->jobsTable->find(["id"], ['value0' => $_GET['jod_id']]);
+            $this->vars['job'] = $this->jobsTable->find(["id"], ['value0' => $_GET['job_id']]);
         }
         if (isset($_GET['cat_id'])) {
             $this->vars['cat'] = $this->catsTable->find(["id"], ['value0' => $_GET['cat_id']]);

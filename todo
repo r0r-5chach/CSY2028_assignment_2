@@ -12,7 +12,8 @@ Assignment 2:
     - Allow customers to filter by location @done
     - Move new framework into project @done
     - Fix Adding categories @done
-    - Archive jobs instead of delete
+    - Archive jobs instead of delete @done
+    - Relist archived jobs with new closing date @done
     - Add admin user control to admin portal
         - User accounts made in admin portal
     - Client user accounts
