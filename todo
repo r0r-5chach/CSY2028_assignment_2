@@ -14,8 +14,8 @@ Assignment 2:
     - Fix Adding categories @done
     - Archive jobs instead of delete @done
     - Relist archived jobs with new closing date @done
-    - Add admin user control to admin portal
-        - User accounts made in admin portal
+    - Add admin user control to admin portal @done
+        - User accounts made in admin portal @done
     - Client user accounts @done
         - restricted admin panel @done
         - add and archive jobs @done

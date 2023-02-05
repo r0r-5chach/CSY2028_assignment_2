@@ -8,7 +8,7 @@ class Routes extends \CSY2028\Routes {
         $this->setDbTables();    
         $this->controllers = [
             "jobs" => new \jobs\controllers\Jobs($this->databaseTables["jobs"], $this->databaseTables["categories"], $this->databaseTables["applicants"]),
-            "portal" => new \jobs\controllers\Portal($this->databaseTables["categories"], $this->databaseTables["jobs"], $this->databaseTables["applicants"]),
+            "portal" => new \jobs\controllers\Portal($this->databaseTables["categories"], $this->databaseTables["jobs"], $this->databaseTables["applicants"], $this->databaseTables['users']),
             "user" => new \jobs\controllers\User($this->databaseTables["users"], $this->databaseTables["categories"])
         ];
         $this->loginControllers = [

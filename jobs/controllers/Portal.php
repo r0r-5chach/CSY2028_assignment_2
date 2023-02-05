@@ -4,12 +4,14 @@ class Portal {
     private $catsTable;
     private $jobsTable;
     private $appsTable;
+    private $usersTable;
     private $vars;
 
-    public function __construct(\jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $appsTable) {
+    public function __construct(\jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $jobsTable, \jobs\JobDatabaseTable $appsTable, \jobs\JobDatabaseTable $usersTable) {
         $this->catsTable = $catsTable;
         $this->jobsTable = $jobsTable;
         $this->appsTable = $appsTable;
+        $this->usersTable = $usersTable;
         $this->vars['cats'] = $this->catsTable->findAll();
         $this->vars['table'] = 'job_table.html.php';
     }
@@ -63,16 +65,17 @@ class Portal {
                 }
                 return $this->categories();
             }
+            if (isset($_POST['user_id'])) {
+                if($_POST['user_type'] == 'client') {
+                    $this->usersTable->delete('id', $_POST['user_id']);
+                    $jobs = $this->jobsTable->find(['clientId'], ['value0' => $_POST['user_id']]);
+                    foreach ($jobs as $job) {
+                        $this->jobsTable->delete('id', $job->id);
+                    }
+                    return $this->users();
+                }
+            }
         }
-    }
-
-    public function secondHomeSubmit() {
-       
-        $this->vars['response'] = 'Update successful';
-        return ['template' => 'response.html.php',
-                'title' => 'Jo\'s Jobs- Success',
-                'vars' => $this->vars
-        ];
     }
 
     public function categories() {
@@ -95,8 +98,54 @@ class Portal {
                 'vars' => $this->vars];
     }
 
-    public function edit() { //TODO: finish this function
-        
+    public function users() {
+        if ($_SESSION['userType'] == 'admin') {
+            $this->vars['table'] = 'user_table.html.php';
+            $this->vars['users'] = $this->usersTable->findAll();
+            return ['template' => 'portal.html.php',
+                    'title' => 'Jo\'s Jobs- Users',
+                    'vars' => $this->vars
+            ];
+        }
+    }
+
+    public function addUser() {
+        if ($_SESSION['userType'] == 'admin') {
+            if (isset($_GET['user_id'])) {
+                $this->vars['user'] = $this->usersTable->find(['id'], ['value0' => $_GET['user_id']])[0];
+                $this->vars['update'] = true;
+            }
+            else {
+                $this->vars['update'] = false;
+            }
+            return ['template' => 'user_add.html.php',
+                    'title' => 'Jo\'s Jobs- Edit user',
+                    'vars' => $this->vars
+            ];
+        }
+    }
+
+    public function addUserSubmit() {
+        if ($_SESSION['userType'] == 'admin') {
+            $record = [
+                'username' => $_POST['username'],
+                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'userType' => $_POST['type']
+            ];
+            if ($_POST['submit'] == 'Update') {
+                $record['id'] = $_POST['user_id'];
+                $this->vars['response'] = 'User Updated Successfully';
+            }
+            else {
+                $this->vars['response'] = 'User Created Successfully';
+            }
+            $this->usersTable->save($record);
+            return [
+                'template' => 'response.html.php',
+                'title' => 'Jo\'s Jobs- Edit user',
+                'vars' => $this->vars
+            ];
+        }
     }
 
     public function addJob() {
@@ -110,7 +159,7 @@ class Portal {
             $this->vars['update'] = false;
         }
         return ['template' => 'job_add.html.php',
-                'title' => 'Jo\'s Jobs- Add Job',
+                'title' => 'Jo\'s Jobs- Edit Job',
                 'vars' => $this->vars
         ];
     }
@@ -158,7 +207,7 @@ class Portal {
                 $this->vars['update'] = false;
             }
             return ['template' => 'category_add.html.php',
-                    'title' => 'Jo\'s Jobs- Add Category',
+                    'title' => 'Jo\'s Jobs- Edit Category',
                     'vars' => $this->vars
             ];
         }
