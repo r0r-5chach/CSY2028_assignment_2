@@ -10,13 +10,19 @@ class Job {
     public $categoryId;
     public $clientId;
     private $catsTable;
+    private $appsTable;
 
-    public function __construct(\jobs\JobDatabaseTable $catsTable) {
+    public function __construct(\jobs\JobDatabaseTable $catsTable, \jobs\JobDatabaseTable $appsTable) {
         $this->catsTable = $catsTable;
+        $this->appsTable = $appsTable;
     }
 
     public function getCat() {
         return $this->catsTable->find(['id'], ['value0' => $this->categoryId])[0];
+    }
+
+    public function getApps() {
+        return $this->appsTable->find(['jobId'], ['value0' => $this->id]);
     }
 }
 ?>
