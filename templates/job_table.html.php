@@ -29,7 +29,7 @@
 				<td><a style="float: right" href="portal/applicants?job_id=<?=$job->id?>">View applicants (<?=count($job->getApps())?>)</a></td>
 				<td><form method="post" action="portal/">
 				    <input type="hidden" name="job_id" value="<?=$job->id?>" />
-				    <input type="submit" name="submit" value="Delete" />
+				    <input type="submit" name="submit" value="Archive" />
 				</form></td>
 			</tr>
 		<?php } ?>

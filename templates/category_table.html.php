@@ -13,7 +13,7 @@
 				<td><a style="float: right" href="/portal/edit?cat_id=<?=$cat->id?>">Edit</a></td>
 				<td><form method="post" action="/portal/">
 				    <input type="hidden" name="cat_id" value="<?=$cat->id?>" />
-				    <input type="submit" name="submit" value="Delete" />
+				    <input type="submit" name="submit" value="Archive" />
 				</form></td>
 			</tr>
 		<?php } ?>

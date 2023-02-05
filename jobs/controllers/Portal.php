@@ -77,9 +77,32 @@ class Portal {
         }
     }
 
-    //TODO: add functions for adding jobs and categories
     public function addJob() {
-        return ['template' => 'add.html.php',
+        return ['template' => 'job_add.html.php',
+                'title' => 'Jo\'s Jobs- Add Job',
+                'vars' => $this->vars
+        ];
+    }
+
+    public function addJobSubmit() {
+        if (count($this->jobsTable->find(['title', 'clientId'], ['value0' => $_POST['title'], 'value1' => $_POST['client_id']])) == 0 && $this->catsTable->find(['name'], ['value0' => $_POST['categoryName']]) != 0) {
+            $record = [
+                'title' => $_POST['title'],
+                'description' => $_POST['description'],
+                'salary' => $_POST['salary'],
+                'closingDate' => $_POST['closingDate'],
+                'categoryId' => $this->catsTable->find(['name'], ['value0' => $_POST['categoryName']])[0]->id,
+                'location' => $_POST['location'],
+                'clientId' => $_POST['client_id']
+            ];
+            $this->jobsTable->save($record);
+            $this->vars['response'] = 'Job made successfully';
+        }
+        else {
+            $this->vars['response'] = 'Some data was incorrect';
+        }
+
+        return ['template' => 'response.html.php',
                 'title' => 'Jo\'s Jobs- Add Job',
                 'vars' => $this->vars
         ];
