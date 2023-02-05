@@ -65,9 +65,10 @@ class Portal {
     }
 
     public function applicants() {
+        $job = $this->jobsTable->find(['id'], ['value0' => $_GET['job_id']])[0];
         $this->vars['table'] = 'applicant_table.html.php';
-        $this->vars['apps'] = $this->appsTable->find(['jobId'], ['value0' => $_GET['job_id']]);
-        $this->vars['job'] = $this->jobsTable->find(['id'], ['value0' => $_GET['job_id']])[0]->title;
+        $this->vars['apps'] = $job->getApps();
+        $this->vars['job'] = $job->title;
         return ['template' => 'portal.html.php',
                 'title' => 'Jo\'s Jobs- Applicants',
                 'vars' => $this->vars];
